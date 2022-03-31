@@ -2,7 +2,7 @@ import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { nanoid } from "nanoid";
 
-const baseURL = "http://makeup-api.herokuapp.com/api/v1/products.json";
+const baseURL = "https://makeup-api.herokuapp.com/api/v1/products.json";
 
 export interface Card {
   id: string;

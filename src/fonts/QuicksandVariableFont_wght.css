@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "QuicksandVariableFont_wght";
+  src: url("fonts/QuicksandVariableFont_wght.eot");
+  src: url("fonts/QuicksandVariableFont_wght.eot") format("embedded-opentype"),
+    url("fonts/QuicksandVariableFont_wght.woff2") format("woff2"),
+    url("fonts/QuicksandVariableFont_wght.woff") format("woff"),
+    url("fonts/QuicksandVariableFont_wght.ttf") format("truetype"),
+    url("fonts/QuicksandVariableFont_wght.svg#QuicksandVariableFont_wght")
+      format("svg");
+}

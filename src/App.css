@@ -1,0 +1,95 @@
+@font-face {
+  font-family: "QuicksandVariableFont_wght";
+  src: url("fonts/QuicksandVariableFont_wght.eot");
+  src: url("fonts/QuicksandVariableFont_wght.eot") format("embedded-opentype"),
+    url("fonts/QuicksandVariableFont_wght.woff2") format("woff2"),
+    url("fonts/QuicksandVariableFont_wght.woff") format("woff"),
+    url("fonts/QuicksandVariableFont_wght.ttf") format("truetype"),
+    url("fonts/QuicksandVariableFont_wght.svg#QuicksandVariableFont_wght")
+      format("svg");
+}
+
+@import "antd/dist/antd.css";
+
+.layout {
+  height: 100vh;
+}
+
+.header {
+  background-color: #f5d742;
+  border-bottom: 0.5px solid #1c5c34;
+}
+
+.header_text {
+  font-family: "QuicksandVariableFont_wght";
+  font-size: 35px;
+  text-align: center;
+
+  font-weight: bold;
+  color: #1c5c34;
+}
+
+.sider {
+  /* background-color: #7cb45c; */
+  background-image: url("https://images.unsplash.com/photo-1449496967047-2a322e78ec26?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80");
+}
+
+.container_search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50%;
+  align-items: center;
+  color: #1c5c34;
+  background-color: #f5d742;
+  font-family: "QuicksandVariableFont_wght";
+  font-weight: bold;
+  border: 0.5px solid #1c5c34;
+  min-height: 305px;
+}
+
+.container_text {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.container_form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  color: #ffffff;
+  justify-content: center;
+}
+.container_card {
+  margin: 20px;
+  max-height: 200px;
+}
+
+.card_item {
+  font-family: "QuicksandVariableFont_wght";
+  font-size: 14px;
+}
+
+.container_menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  text-align: center;
+  font-family: "QuicksandVariableFont_wght";
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #1c5c34;
+  color: #f5d742;
+}
+
+.container_menu p {
+  margin: 0px auto;
+}
+
+.container_menu p:hover {
+  text-decoration: underline;
+}

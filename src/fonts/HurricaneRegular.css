@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'HurricaneRegular';
+    src: url('fonts/HurricaneRegular.eot');
+    src: url('fonts/HurricaneRegular.eot') format('embedded-opentype'),
+         url('fonts/HurricaneRegular.woff2') format('woff2'),
+         url('fonts/HurricaneRegular.woff') format('woff'),
+         url('fonts/HurricaneRegular.ttf') format('truetype'),
+         url('fonts/HurricaneRegular.svg#HurricaneRegular') format('svg');
+}

@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/makeup_app/static/css/main.32761a2b.css",
+    "main.js": "/makeup_app/static/js/main.61a50ce2.js",
+    "static/js/787.82cbddb8.chunk.js": "/makeup_app/static/js/787.82cbddb8.chunk.js",
+    "static/media/QuicksandVariableFont_wght.svg": "/makeup_app/static/media/QuicksandVariableFont_wght.811fe9becf88a3c7ea20.svg",
+    "static/media/QuicksandVariableFont_wght.eot": "/makeup_app/static/media/QuicksandVariableFont_wght.986b2e5fb73d7f9b3489.eot",
+    "static/media/QuicksandVariableFont_wght.ttf": "/makeup_app/static/media/QuicksandVariableFont_wght.9a9c59a536738e65b559.ttf",
+    "static/media/QuicksandVariableFont_wght.woff": "/makeup_app/static/media/QuicksandVariableFont_wght.06321f9783c4e79ae80b.woff",
+    "static/media/QuicksandVariableFont_wght.woff2": "/makeup_app/static/media/QuicksandVariableFont_wght.9dd1cfe39a1cf84a08b2.woff2",
+    "index.html": "/makeup_app/index.html",
+    "main.32761a2b.css.map": "/makeup_app/static/css/main.32761a2b.css.map",
+    "main.61a50ce2.js.map": "/makeup_app/static/js/main.61a50ce2.js.map",
+    "787.82cbddb8.chunk.js.map": "/makeup_app/static/js/787.82cbddb8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.32761a2b.css",
+    "static/js/main.61a50ce2.js"
+  ]
+}

@@ -1,20 +1,22 @@
 {
   "files": {
-    "main.css": "/makeup_app/static/css/main.32761a2b.css",
-    "main.js": "/makeup_app/static/js/main.60103276.js",
+    "main.css": "/makeup_app/static/css/main.cec516b1.css",
+    "main.js": "/makeup_app/static/js/main.a9efb627.js",
     "static/js/787.82cbddb8.chunk.js": "/makeup_app/static/js/787.82cbddb8.chunk.js",
+    "static/media/placeholder.jpg": "/makeup_app/static/media/placeholder.1a3b7213d3822b5f7317.jpg",
+    "static/media/makeupkit.jpg": "/makeup_app/static/media/makeupkit.0ad98868a44a29c90509.jpg",
     "static/media/QuicksandVariableFont_wght.svg": "/makeup_app/static/media/QuicksandVariableFont_wght.811fe9becf88a3c7ea20.svg",
     "static/media/QuicksandVariableFont_wght.eot": "/makeup_app/static/media/QuicksandVariableFont_wght.986b2e5fb73d7f9b3489.eot",
     "static/media/QuicksandVariableFont_wght.ttf": "/makeup_app/static/media/QuicksandVariableFont_wght.9a9c59a536738e65b559.ttf",
     "static/media/QuicksandVariableFont_wght.woff": "/makeup_app/static/media/QuicksandVariableFont_wght.06321f9783c4e79ae80b.woff",
     "static/media/QuicksandVariableFont_wght.woff2": "/makeup_app/static/media/QuicksandVariableFont_wght.9dd1cfe39a1cf84a08b2.woff2",
     "index.html": "/makeup_app/index.html",
-    "main.32761a2b.css.map": "/makeup_app/static/css/main.32761a2b.css.map",
-    "main.60103276.js.map": "/makeup_app/static/js/main.60103276.js.map",
+    "main.cec516b1.css.map": "/makeup_app/static/css/main.cec516b1.css.map",
+    "main.a9efb627.js.map": "/makeup_app/static/js/main.a9efb627.js.map",
     "787.82cbddb8.chunk.js.map": "/makeup_app/static/js/787.82cbddb8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.32761a2b.css",
-    "static/js/main.60103276.js"
+    "static/css/main.cec516b1.css",
+    "static/js/main.a9efb627.js"
   ]
 }

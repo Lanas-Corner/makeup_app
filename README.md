@@ -1,4 +1,4 @@
-**CREATE YOUR MAKEUP KIT** is an app for searching makeup products by brand name and product type. 
+**CREATE YOUR MAKEUP KIT** is a demo app for searching makeup products by brand name and product type. 
 
 Users can pick their favourite makeup products and add them to the makeup kit. 
 

@@ -1,12 +1,7 @@
-import { Drawer as DrawerEl, List, Image, Card } from "antd";
-import {
-  LikeOutlined,
-  LikeFilled,
-  DeleteOutlined,
-  CloseOutlined,
-} from "@ant-design/icons";
+import { Drawer as DrawerEl, List, Image } from "antd";
+import { DeleteOutlined, CloseOutlined } from "@ant-design/icons";
 import store, { Card as infoCard } from "../Store";
-import Placeholder from "../images/placeholder.jpg";
+import { observer } from "mobx-react-lite";
 
 const Drawer = ({
   showLiked,
@@ -15,7 +10,6 @@ const Drawer = ({
   showLiked: boolean;
   setShowLiked: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const { Meta } = Card;
   return (
     <DrawerEl
       open={showLiked}
@@ -27,100 +21,40 @@ const Drawer = ({
       closeIcon={null}
       extra={<CloseOutlined key="close" onClick={() => setShowLiked(false)} />}
     >
-      <div className="modal_container">
-        <List
-          grid={{
-            gutter: 16,
-          }}
-          style={{ margin: "auto" }}
-          itemLayout="horizontal"
-          locale={{ emptyText: "your makeup kit is empty" }}
-          dataSource={store.likedCards}
-          pagination={{
-            defaultPageSize: 4,
-            position: "top",
-            hideOnSinglePage: true,
-            size: "small",
-            style: {
-              marginBottom: "5px",
-            },
-          }}
-          size="small"
-          renderItem={(card: infoCard) => (
-            <List.Item>
-              <Card
-                className="card_item"
-                key={card.id}
-                style={{
-                  width: 150,
-                  height: 250,
-                  textAlign: "center",
-                  color: "#4f3720",
-                  border: "0.3px solid rgb(79, 55, 32, 0.3)",
+      <List
+        itemLayout="horizontal"
+        locale={{ emptyText: "Empty" }}
+        dataSource={store.likedCards}
+        size="small"
+        renderItem={(card: infoCard) => (
+          <List.Item
+            actions={[
+              <DeleteOutlined
+                key="delete"
+                onClick={() => {
+                  store.removeCard(card.id);
                 }}
-                cover={
-                  <Image
-                    height="75px"
-                    width="80px"
-                    alt="product"
-                    src={card.image_link}
-                    style={{ margin: "1px auto" }}
-                    placeholder={
-                      <Image
-                        preview={false}
-                        src={Placeholder}
-                        height="75px"
-                        width="80px"
-                        alt="placeholder"
-                      />
-                    }
-                  />
-                }
-                actions={[
-                  !card.isLiked ? (
-                    <LikeOutlined
-                      key="notLiked"
-                      onClick={() => {
-                        store.toLike(card.id);
-                      }}
-                      style={{
-                        color: "#4f3720",
-                        fontSize: "14px",
-                      }}
-                    />
-                  ) : (
-                    <LikeFilled
-                      key="isLiked"
-                      style={{ color: "#4f3720", fontSize: "14px" }}
-                      onClick={() => {
-                        store.toUnlike(card.id);
-                      }}
-                    />
-                  ),
-                  <DeleteOutlined
-                    key="delete"
-                    onClick={() => {
-                      store.removeCard(card.id);
-                    }}
-                    style={{ color: "#4f3720", fontSize: "14px" }}
-                  />,
-                ]}
-                hoverable
-              >
-                <Meta
-                  description={card.name}
-                  style={{
-                    height: 80,
-                    fontSize: "12px",
-                  }}
+                style={{ color: "#4f3720", fontSize: "14px" }}
+              />,
+            ]}
+          >
+            <List.Item.Meta
+              avatar={
+                <Image
+                  src={card.image_link}
+                  alt={card.name}
+                  width={60}
+                  height={60}
                 />
-              </Card>
-            </List.Item>
-          )}
-        />
-      </div>
+              }
+              title={card.product}
+              description={card.name}
+            />
+          </List.Item>
+        )}
+      />
     </DrawerEl>
   );
 };
 
-export default Drawer;
+export default observer(Drawer);

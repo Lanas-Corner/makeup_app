@@ -3,12 +3,12 @@ import { Form, Select, Button, Card, Badge, Modal, List, Image } from "antd";
 import { LikeOutlined, LikeFilled, DeleteOutlined } from "@ant-design/icons";
 import { SearchOutlined } from "@ant-design/icons";
 import FormItem from "antd/lib/form/FormItem";
-import logo from "./makeupkit.jpg";
+import logo from "../images/makeupkit.jpg";
 import { observer } from "mobx-react-lite";
 import ItemCard from "./ItemCard";
 import { nanoid } from "nanoid";
-import Placeholder from "./placeholder.jpg";
-import store, { Card as infoCard } from "./Store";
+import Placeholder from "../images/placeholder.jpg";
+import store, { Card as infoCard } from "../Store";
 
 const SearchForm = observer(() => {
   const [form] = Form.useForm();
@@ -36,6 +36,7 @@ const SearchForm = observer(() => {
               hoverable
               cover={
                 <img
+                  alt="makeup_kit"
                   src={logo}
                   style={{
                     maxHeight: "100px",

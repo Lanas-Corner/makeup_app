@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
 import { Card, List, Image } from "antd";
 import { LikeOutlined, LikeFilled, DeleteOutlined } from "@ant-design/icons";
-import store, { Card as infoCard } from "./Store";
-import Placeholder from "./placeholder.jpg";
+import store, { Card as infoCard } from "../Store";
+import Placeholder from "../images/placeholder.jpg";
 
 const ItemCard = observer(() => {
   const { Meta } = Card;

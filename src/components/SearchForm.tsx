@@ -9,6 +9,7 @@ import ItemCard from "./ItemCard";
 import { nanoid } from "nanoid";
 import Placeholder from "../images/placeholder.jpg";
 import store, { Card as infoCard } from "../Store";
+import Drawer from "./Drawer";
 
 const SearchForm = observer(() => {
   const [form] = Form.useForm();
@@ -332,123 +333,7 @@ const SearchForm = observer(() => {
         </div>
       </div>
       <ItemCard />
-      <Modal
-        visible={showLiked}
-        afterClose={() => setShowLiked(false)}
-        footer={null}
-        closable={false}
-        centered={true}
-        width="875px"
-      >
-        <div className="modal_container">
-          <p className="container_text">Your favourite makeup products</p>
-          <List
-            grid={{
-              gutter: 16,
-            }}
-            style={{ margin: "auto" }}
-            itemLayout="horizontal"
-            locale={{ emptyText: "your makeup kit is empty" }}
-            dataSource={store.likedCards}
-            pagination={{
-              defaultPageSize: 4,
-              position: "top",
-              hideOnSinglePage: true,
-              size: "small",
-              style: {
-                marginBottom: "5px",
-              },
-            }}
-            size="small"
-            renderItem={(card: infoCard) => (
-              <List.Item>
-                <Card
-                  className="card_item"
-                  key={card.id}
-                  style={{
-                    width: 150,
-                    height: 250,
-                    textAlign: "center",
-                    color: "#4f3720",
-                    border: "0.3px solid rgb(79, 55, 32, 0.3)",
-                  }}
-                  cover={
-                    <Image
-                      height="75px"
-                      width="80px"
-                      alt="product"
-                      src={card.image_link}
-                      style={{ margin: "1px auto" }}
-                      placeholder={
-                        <Image
-                          preview={false}
-                          src={Placeholder}
-                          height="75px"
-                          width="80px"
-                          alt="placeholder"
-                        />
-                      }
-                    />
-                  }
-                  actions={[
-                    !card.isLiked ? (
-                      <LikeOutlined
-                        key="notLiked"
-                        onClick={() => {
-                          store.toLike(card.id);
-                        }}
-                        style={{
-                          color: "#4f3720",
-                          fontSize: "14px",
-                        }}
-                      />
-                    ) : (
-                      <LikeFilled
-                        key="isLiked"
-                        style={{ color: "#4f3720", fontSize: "14px" }}
-                        onClick={() => {
-                          store.toUnlike(card.id);
-                        }}
-                      />
-                    ),
-                    <DeleteOutlined
-                      key="delete"
-                      onClick={() => {
-                        store.removeCard(card.id);
-                      }}
-                      style={{ color: "#4f3720", fontSize: "14px" }}
-                    />,
-                  ]}
-                  hoverable
-                >
-                  <Meta
-                    description={card.name}
-                    style={{
-                      height: 80,
-                      fontSize: "12px",
-                    }}
-                  />
-                </Card>
-              </List.Item>
-            )}
-          />
-          <Button
-            onClick={() => setShowLiked(false)}
-            style={{
-              backgroundColor: "#4f3720",
-              border: "0.5px solid #4f3720",
-              color: "white",
-              width: "150px",
-              marginTop: "30px",
-              fontFamily: "QuicksandVariableFont_wght",
-              letterSpacing: "1px",
-              fontWeight: "bold",
-            }}
-          >
-            Close
-          </Button>
-        </div>
-      </Modal>
+      <Drawer showLiked={showLiked} setShowLiked={setShowLiked} />
     </>
   );
 });

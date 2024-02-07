@@ -1,9 +1,9 @@
 import "./App.css";
 import { Layout } from "antd";
-import SearchForm from "./SearchForm";
+import SearchForm from "./components/SearchForm";
 
 function App() {
-  const { Header, Content, Footer } = Layout;
+  const { Header, Content } = Layout;
 
   return (
     <Layout className="layout">

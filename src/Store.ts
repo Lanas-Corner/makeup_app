@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx";
 import { nanoid } from "nanoid";
 
 const baseURL = "https://makeup-api.herokuapp.com/api/v1/products.json";
+const LS_KEY: string = "makeup_kit";
 
 export interface Card {
   id: string;
@@ -32,15 +33,18 @@ class Store {
   isError = false;
 
   constructor() {
+    this.getLikedCards();
     makeAutoObservable(this);
   }
-
+  getLikedCards() {
+    const localCards = localStorage.getItem(LS_KEY);
+    this.likedCards = localCards ? JSON.parse(localCards) : [];
+  }
   getCards(brand: string) {
     this.cards = [];
     this.brand = brand;
     this.products = [];
     this.shownCards = [];
-    let res: any;
     if (this.brand !== "") {
       axios
         .get(baseURL + `?brand=${brand}`)
@@ -88,6 +92,7 @@ class Store {
     );
     const likedCard = this.cards.filter((card) => card.id === id);
     this.likedCards.push(likedCard[0]);
+    localStorage.setItem(LS_KEY, JSON.stringify(this.likedCards));
   }
 
   toUnlike(id: string) {

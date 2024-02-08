@@ -1,17 +1,14 @@
-import { useState } from "react";
-import { Form, Select, Button, Card, Badge, Modal, List, Image } from "antd";
-import { LikeOutlined, LikeFilled, DeleteOutlined } from "@ant-design/icons";
+import { useContext, useState } from "react";
+import { Form, Select, Button, Card, Badge } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import FormItem from "antd/lib/form/FormItem";
 import logo from "../images/makeupkit.jpg";
-import { observer } from "mobx-react-lite";
 import ItemCard from "./ItemCard";
 import { nanoid } from "nanoid";
-import Placeholder from "../images/placeholder.jpg";
-import store, { Card as infoCard } from "../Store";
 import Drawer from "./Drawer";
+import { AppContext } from "../context/AppContext";
 
-const SearchForm = observer(() => {
+const SearchForm = () => {
   const [form] = Form.useForm();
   const { Option } = Select;
   const { Meta } = Card;
@@ -19,8 +16,17 @@ const SearchForm = observer(() => {
   const [product, setProduct] = useState("");
   const [isFetching, setIsFetching] = useState(false);
   const [showLiked, setShowLiked] = useState(false);
+  const {
+    products,
+    likedCards,
+    getCards,
+    showCards,
+    disable,
+    isDisabled,
+    isError,
+  } = useContext(AppContext);
 
-  let productList = store.products.map((card: string) => {
+  let productList = products.map((card: string) => {
     return (
       <Option value={card} key={nanoid()} className="option">
         {card}
@@ -32,7 +38,7 @@ const SearchForm = observer(() => {
     <>
       <div className="container_search">
         <div className="container_kit" onClick={() => setShowLiked(true)}>
-          <Badge count={store.likedCards.length} color="#4f3720">
+          <Badge count={likedCards.length} color="#4f3720">
             <Card
               hoverable
               cover={
@@ -56,7 +62,7 @@ const SearchForm = observer(() => {
             >
               <Meta
                 description={
-                  store.likedCards.length === 0
+                  likedCards.length === 0
                     ? "makeup kit is empty"
                     : "show makeup kit"
                 }
@@ -96,10 +102,10 @@ const SearchForm = observer(() => {
                   onChange={(val) => {
                     setBrand(val);
                     setProduct("");
-                    store.disable();
-                    store.getCards(val);
+                    disable();
+                    getCards(val);
                   }}
-                  disabled={isFetching || store.isDisabled}
+                  disabled={isFetching || isDisabled}
                   style={{
                     width: "200px",
                     textAlign: "center",
@@ -280,7 +286,7 @@ const SearchForm = observer(() => {
                   onChange={(val) => {
                     setProduct(val);
                   }}
-                  disabled={store.isDisabled}
+                  disabled={isDisabled}
                   style={{
                     width: "200px",
                     textAlign: "center",
@@ -295,20 +301,17 @@ const SearchForm = observer(() => {
                   htmlType="submit"
                   icon={<SearchOutlined />}
                   disabled={
-                    brand === "" ||
-                    product === "" ||
-                    isFetching ||
-                    store.isDisabled
+                    brand === "" || product === "" || isFetching || isDisabled
                       ? true
                       : false
                   }
                   onClick={async () => {
                     setIsFetching(true);
-                    store.showCards(product);
+                    showCards(product);
                     setIsFetching(false);
                   }}
                   style={
-                    store.isDisabled || brand === "" || product === ""
+                    isDisabled || brand === "" || product === ""
                       ? { backgroundColor: "white" }
                       : {
                           backgroundColor: "#4f3720",
@@ -320,7 +323,7 @@ const SearchForm = observer(() => {
               </FormItem>
             </Form>
           </div>
-          {store.isError ? (
+          {isError ? (
             <p className="text">"Connection error occured."</p>
           ) : (
             <></>
@@ -331,6 +334,6 @@ const SearchForm = observer(() => {
       <Drawer showLiked={showLiked} setShowLiked={setShowLiked} />
     </>
   );
-});
+};
 
 export default SearchForm;

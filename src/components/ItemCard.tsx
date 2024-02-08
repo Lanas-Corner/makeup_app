@@ -1,11 +1,14 @@
-import { observer } from "mobx-react-lite";
 import { Card, List, Image } from "antd";
 import { LikeOutlined, LikeFilled, DeleteOutlined } from "@ant-design/icons";
-import store, { Card as infoCard } from "../Store";
 import Placeholder from "../images/placeholder.jpg";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
+import { Card as infoCard } from "../hooks/useConfig";
 
-const ItemCard = observer(() => {
+const ItemCard = () => {
   const { Meta } = Card;
+  const { shownCards, addCard, removeCard, removeLikedCard, isLiked } =
+    useContext(AppContext);
 
   return (
     <div className="container_list">
@@ -15,7 +18,7 @@ const ItemCard = observer(() => {
         }}
         itemLayout="horizontal"
         locale={{ emptyText: "No products found" }}
-        dataSource={store.shownCards}
+        dataSource={shownCards}
         pagination={{
           defaultPageSize: 6,
           position: "top",
@@ -60,11 +63,11 @@ const ItemCard = observer(() => {
                 />
               }
               actions={[
-                !card.isLiked ? (
+                !isLiked(card) ? (
                   <LikeOutlined
                     key="notLiked"
                     onClick={() => {
-                      store.toLike(card.id);
+                      addCard(card);
                     }}
                     style={{
                       color: "#4f3720",
@@ -76,14 +79,14 @@ const ItemCard = observer(() => {
                     key="isLiked"
                     style={{ color: "#4f3720", fontSize: "14px" }}
                     onClick={() => {
-                      store.toUnlike(card.id);
+                      removeLikedCard(card);
                     }}
                   />
                 ),
                 <DeleteOutlined
                   key="delete"
                   onClick={() => {
-                    store.removeCard(card.id);
+                    removeCard(card);
                   }}
                   style={{ color: "#4f3720", fontSize: "14px" }}
                 />,
@@ -100,6 +103,6 @@ const ItemCard = observer(() => {
       />
     </div>
   );
-});
+};
 
 export default ItemCard;

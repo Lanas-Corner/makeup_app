@@ -1,7 +1,8 @@
 import { Drawer as DrawerEl, List, Image } from "antd";
 import { DeleteOutlined, CloseOutlined } from "@ant-design/icons";
-import store, { Card as infoCard } from "../Store";
-import { observer } from "mobx-react-lite";
+import { Card as infoCard } from "../hooks/useConfig";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
 
 const Drawer = ({
   showLiked,
@@ -10,6 +11,7 @@ const Drawer = ({
   showLiked: boolean;
   setShowLiked: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const { likedCards, removeLikedCard } = useContext(AppContext);
   return (
     <DrawerEl
       open={showLiked}
@@ -24,7 +26,7 @@ const Drawer = ({
       <List
         itemLayout="horizontal"
         locale={{ emptyText: "Empty" }}
-        dataSource={store.likedCards}
+        dataSource={likedCards}
         size="small"
         renderItem={(card: infoCard) => (
           <List.Item
@@ -32,7 +34,7 @@ const Drawer = ({
               <DeleteOutlined
                 key="delete"
                 onClick={() => {
-                  store.removeCard(card.id);
+                  removeLikedCard(card);
                 }}
                 style={{ color: "#4f3720", fontSize: "14px" }}
               />,
@@ -57,4 +59,4 @@ const Drawer = ({
   );
 };
 
-export default observer(Drawer);
+export default Drawer;

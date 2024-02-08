@@ -18,7 +18,7 @@ const Drawer = ({
       closable={true}
       title="Your makeup kit"
       placement="left"
-      closeIcon={null}
+      closeIcon={<></>}
       extra={<CloseOutlined key="close" onClick={() => setShowLiked(false)} />}
     >
       <List

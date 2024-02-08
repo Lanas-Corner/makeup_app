@@ -103,7 +103,6 @@ const SearchForm = observer(() => {
                   style={{
                     width: "200px",
                     textAlign: "center",
-                    border: "0.5px solid #4F3720",
                   }}
                 >
                   <Option value="almay" className="option">
@@ -285,7 +284,6 @@ const SearchForm = observer(() => {
                   style={{
                     width: "200px",
                     textAlign: "center",
-                    border: "0.5px solid #4F3720",
                   }}
                 >
                   {productList}
@@ -314,9 +312,6 @@ const SearchForm = observer(() => {
                       ? { backgroundColor: "white" }
                       : {
                           backgroundColor: "#4f3720",
-                          border: "0.5px solid #4f3720",
-                          fontFamily: "QuicksandVariableFont_wght",
-                          letterSpacing: "0.5px",
                         }
                   }
                 >

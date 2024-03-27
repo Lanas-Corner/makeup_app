@@ -9,6 +9,7 @@ export type AppContextType = {
   shownCards: Card[];
   getCards: (brand: string) => void;
   showCards: (product: string) => void;
+  setShownCards: React.Dispatch<React.SetStateAction<Card[]>>;
   addCard: (card: Card) => void;
   removeCard: (card: Card) => void;
   removeLikedCard: (card: Card) => void;
@@ -24,6 +25,7 @@ export const AppContext = React.createContext<AppContextType>({
   shownCards: [],
   getCards: () => {},
   showCards: () => {},
+  setShownCards: () => {},
   addCard: () => {},
   removeCard: () => {},
   removeLikedCard: () => {},
@@ -43,6 +45,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     shownCards,
     getCards,
     showCards,
+    setShownCards,
     addCard,
     removeCard,
     removeLikedCard,
@@ -60,6 +63,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
         shownCards,
         getCards,
         showCards,
+        setShownCards,
         addCard,
         removeCard,
         removeLikedCard,

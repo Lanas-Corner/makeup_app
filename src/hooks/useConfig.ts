@@ -78,6 +78,7 @@ const useConfig = () => {
       setProducts(newProducts);
       setIsDisabled(false);
       setIsError(false);
+      setShownCards(fetchedCards);
     }
   }
   function showCards(product: string) {
@@ -101,6 +102,7 @@ const useConfig = () => {
     shownCards,
     getCards,
     showCards,
+    setShownCards,
     addCard,
     removeCard,
     removeLikedCard,

@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
-import { Form, Select, Button, Card, Badge } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { Form, Select, Card, Badge } from "antd";
 import FormItem from "antd/lib/form/FormItem";
 import logo from "../images/makeupkit.jpg";
 import ItemCard from "./ItemCard";
@@ -21,6 +20,7 @@ const SearchForm = () => {
     likedCards,
     getCards,
     showCards,
+    setShownCards,
     disable,
     isDisabled,
     isError,
@@ -96,10 +96,12 @@ const SearchForm = () => {
             >
               <FormItem name="brand" style={{ padding: "10px 15px" }}>
                 <Select
+                  value={brand}
                   showSearch
                   placeholder="select brand"
                   optionFilterProp="children"
                   onChange={(val) => {
+                    setShownCards([]);
                     setBrand(val);
                     setProduct("");
                     disable();
@@ -280,11 +282,15 @@ const SearchForm = () => {
               </FormItem>
               <FormItem name="product" style={{ padding: "10px 15px" }}>
                 <Select
+                  value={product}
                   showSearch
                   placeholder="select a product type"
                   optionFilterProp="children"
                   onChange={(val) => {
-                    setProduct(val);
+                    setProduct(product);
+                    setIsFetching(true);
+                    showCards(val);
+                    setIsFetching(false);
                   }}
                   disabled={isDisabled}
                   style={{
@@ -294,32 +300,6 @@ const SearchForm = () => {
                 >
                   {productList}
                 </Select>
-              </FormItem>
-              <FormItem style={{ padding: "10px 15px" }}>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  icon={<SearchOutlined />}
-                  disabled={
-                    brand === "" || product === "" || isFetching || isDisabled
-                      ? true
-                      : false
-                  }
-                  onClick={async () => {
-                    setIsFetching(true);
-                    showCards(product);
-                    setIsFetching(false);
-                  }}
-                  style={
-                    isDisabled || brand === "" || product === ""
-                      ? { backgroundColor: "white" }
-                      : {
-                          backgroundColor: "#4f3720",
-                        }
-                  }
-                >
-                  search
-                </Button>
               </FormItem>
             </Form>
           </div>

@@ -41,9 +41,9 @@ const ItemCard = () => {
                 border: "0.3px solid rgb(79, 55, 32, 0.3)",
                 margin: "0px",
               }}
-              bodyStyle={{
-                backgroundColor: "rgb(216, 205, 208, 0.2)",
-              }}
+              // bodyStyle={{
+              //   backgroundColor: "rgb(216, 205, 208, 0.2)",
+              // }}
               cover={
                 <Image
                   height="75px"

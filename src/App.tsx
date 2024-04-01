@@ -1,25 +1,30 @@
 import "./App.css";
 import { Layout } from "antd";
 import SearchForm from "./components/SearchForm";
-import { Typography } from "antd";
 import AppContextProvider from "./context/AppContext";
 import AntdConfig from "./style/Config";
-import { HeaderTitleStyle, LayoutStyle, ContentStyle } from "./style/styles";
+import { LayoutStyle, ContentStyle } from "./style/styles";
+import ItemCard from "./components/ItemCard";
+import Drawer from "./components/Drawer";
+import { useState } from "react";
+import Header from "./components/Header";
 
-const { Title } = Typography;
-const { Header, Content } = Layout;
+const { Header: HeaderElement, Content } = Layout;
 
 function App() {
+  const [showLiked, setShowLiked] = useState(false);
   return (
     <AppContextProvider>
       <AntdConfig>
         <Layout style={LayoutStyle}>
-          <Header>
-            <Title style={HeaderTitleStyle}>Create your makeup kit!</Title>
-          </Header>
+          <HeaderElement>
+            <Header setShowLiked={setShowLiked} />
+          </HeaderElement>
           <Content style={ContentStyle}>
             <SearchForm />
+            <ItemCard />
           </Content>
+          <Drawer showLiked={showLiked} setShowLiked={setShowLiked} />
         </Layout>
       </AntdConfig>
     </AppContextProvider>

@@ -14,20 +14,10 @@ const ItemCard = () => {
     <div className="container_list">
       <List
         grid={{
-          gutter: 16,
+          column: 3,
         }}
-        itemLayout="horizontal"
         locale={{ emptyText: "No products found" }}
         dataSource={shownCards}
-        pagination={{
-          defaultPageSize: 6,
-          position: "top",
-          hideOnSinglePage: true,
-          size: "small",
-          style: {
-            marginBottom: "5px",
-          },
-        }}
         renderItem={(card: infoCard) => (
           <List.Item>
             <Card

@@ -7,9 +7,8 @@ const AntdConfig = ({ children }: { children: ReactNode }) => {
       theme={{
         token: {
           colorPrimary: "#4f3720",
-          colorText: "#4f3720",
+          colorText: "black",
           controlOutlineWidth: 0,
-          colorBgBase: "#ffffff",
           fontSize: 14,
           fontSizeHeading1: 40,
           fontWeightStrong: 400,
@@ -17,11 +16,9 @@ const AntdConfig = ({ children }: { children: ReactNode }) => {
         },
         components: {
           Layout: {
-            headerBg: "#ffffff",
-            headerColor: "#4f3720",
-            headerHeight: 70,
-            bodyBg: "#ffffff",
-            footerBg: "#ffffff",
+            headerBg: "#0C0D09",
+            headerColor: "#908863",
+            headerHeight: 80,
           },
           List: {
             descriptionFontSize: 12,
@@ -29,6 +26,10 @@ const AntdConfig = ({ children }: { children: ReactNode }) => {
           Typography: {
             titleMarginTop: 10,
             titleMarginBottom: 10,
+          },
+          Select: {
+            optionActiveBg: "white",
+            optionSelectedBg: "#908863",
           },
         },
       }}

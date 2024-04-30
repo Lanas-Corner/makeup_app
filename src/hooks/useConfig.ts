@@ -56,8 +56,8 @@ const useConfig = () => {
     return isLiked.length > 0;
   }
 
-  async function getCards(brand: string) {
-    const res = await fetchCards(brand);
+  async function getCards(brand: string, product: string) {
+    const res = await fetchCards(brand, product);
     if (res) {
       const fetchedCards = res.data.map((card: ServerCard) => {
         return {

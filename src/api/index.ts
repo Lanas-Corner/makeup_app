@@ -2,14 +2,18 @@ import axios from "axios";
 
 const baseURL = "https://makeup-api.herokuapp.com/api/v1/products.json";
 
-export async function fetchCards(brand: string) {
+export async function fetchCards(brand: string, product: string) {
+  let URL = baseURL;
   if (brand !== "") {
-    return axios
-      .get(baseURL + `?brand=${brand}`)
-      .then((res) => res)
-      .catch((err) => {
-        throw new Error(err);
-      });
+    URL += `?brand=${brand}&`;
   }
-  return;
+  if (product !== "") {
+    URL += `?product_type=${product}&`;
+  }
+  return axios
+    .get(URL)
+    .then((res) => res)
+    .catch((err) => {
+      throw new Error(err);
+    });
 }

@@ -7,7 +7,7 @@ export type AppContextType = {
   likedCards: Card[];
   products: string[];
   shownCards: Card[];
-  getCards: (brand: string) => void;
+  getCards: (brand: string, product: string) => void;
   showCards: (product: string) => void;
   setShownCards: React.Dispatch<React.SetStateAction<Card[]>>;
   addCard: (card: Card) => void;

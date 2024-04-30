@@ -10,7 +10,7 @@ const ItemCard = () => {
   const { shownCards, addCard, removeCard, removeLikedCard, isLiked } =
     useContext(AppContext);
 
-  return (
+  return shownCards.length > 0 ? (
     <div className="container_list">
       <List
         grid={{
@@ -31,9 +31,6 @@ const ItemCard = () => {
                 border: "0.3px solid rgb(79, 55, 32, 0.3)",
                 margin: "0px",
               }}
-              // bodyStyle={{
-              //   backgroundColor: "rgb(216, 205, 208, 0.2)",
-              // }}
               cover={
                 <Image
                   height="75px"
@@ -92,7 +89,7 @@ const ItemCard = () => {
         )}
       />
     </div>
-  );
+  ) : null;
 };
 
 export default ItemCard;

@@ -8,6 +8,7 @@ import ItemCard from "./components/ItemCard";
 import Drawer from "./components/Drawer";
 import { useState } from "react";
 import Header from "./components/Header";
+import Menu from "./components/Menu";
 
 const { Header: HeaderElement, Content } = Layout;
 
@@ -21,6 +22,7 @@ function App() {
             <Header setShowLiked={setShowLiked} />
           </HeaderElement>
           <Content style={ContentStyle}>
+            <Menu />
             <SearchForm />
             <ItemCard />
           </Content>

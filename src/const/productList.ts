@@ -1,4 +1,4 @@
-export const productTypes = [
+export const productList: string[] = [
   "blush",
   "bronzer",
   "eyebrow",

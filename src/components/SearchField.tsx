@@ -1,7 +1,7 @@
 import { Select } from "antd";
 import { brandNames } from "../const/brandList";
 import { nanoid } from "nanoid";
-import { productTypes } from "../const/productTypes";
+import { productList } from "../const/productList";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
@@ -36,7 +36,7 @@ const SearchField = () => {
           {brand}
         </Option>
       ))}
-      {productTypes.map((product: string) => (
+      {productList.map((product: string) => (
         <Option
           key={nanoid()}
           value={product + "_product"}

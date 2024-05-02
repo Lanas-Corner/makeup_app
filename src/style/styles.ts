@@ -20,5 +20,5 @@ export const ContentStyle: React.CSSProperties = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "flex-start",
-  // alignItems: "center",
+  background: "#ebebeb",
 };

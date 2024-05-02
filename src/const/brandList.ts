@@ -1,4 +1,4 @@
-export const brandNames = [
+export const brandNames: string[] = [
   "almay",
   "alva",
   "anna sui",

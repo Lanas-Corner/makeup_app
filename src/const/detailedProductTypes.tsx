@@ -15,7 +15,7 @@ export interface ArticleType {
   paragraph: string;
 }
 
-interface ProductGroup {
+export interface ProductGroup {
   title: string;
   products: ProductType[];
   articles: ArticleType[];

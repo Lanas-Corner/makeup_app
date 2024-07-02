@@ -6,12 +6,11 @@ import { AppContext } from "../context/AppContext";
 import { Card as infoCard } from "../hooks/useConfig";
 
 const ItemCard = () => {
-  const { Meta } = Card;
   const { shownCards, addCard, removeCard, removeLikedCard, isLiked } =
     useContext(AppContext);
 
   return shownCards.length > 0 ? (
-    <div className="container_list">
+    <div style={{ maxHeight: "80vh", overflow: "scroll" }}>
       <List
         grid={{
           column: 3,
@@ -24,8 +23,6 @@ const ItemCard = () => {
               className="card_item"
               key={card.id}
               style={{
-                width: 150,
-                height: 250,
                 textAlign: "center",
                 color: "#4f3720",
                 border: "0.3px solid rgb(79, 55, 32, 0.3)",
@@ -33,17 +30,18 @@ const ItemCard = () => {
               }}
               cover={
                 <Image
-                  height="75px"
-                  width="80px"
                   alt="product"
-                  src={card.image_link}
+                  src={card.image_link || Placeholder}
                   style={{ margin: "1px auto" }}
+                  loading="eager"
+                  height="255px"
+                  // width="80px"
                   placeholder={
                     <Image
                       preview={false}
                       src={Placeholder}
-                      height="75px"
-                      width="80px"
+                      height="255px"
+                      // width="380px"
                       alt="placeholder"
                     />
                   }
@@ -80,9 +78,9 @@ const ItemCard = () => {
               ]}
               hoverable
             >
-              <Meta
+              <List.Item.Meta
                 description={card.name}
-                style={{ height: 80, fontSize: "12px", paddingTop: "auto" }}
+                style={{ height: 80, fontSize: "14px", paddingTop: "auto" }}
               />
             </Card>
           </List.Item>

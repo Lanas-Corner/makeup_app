@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseURL = "https://makeup-api.herokuapp.com/api/v1/products.json";
+// const baseURL = "https://makeup-api.herokuapp.com/api/v1/products.json";
+const baseURL = "http://localhost:4000";
 
 export async function fetchCards(brand: string, product: string) {
   let URL = baseURL;

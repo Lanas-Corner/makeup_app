@@ -1,5 +1,8 @@
 import { Breadcrumb, Flex, Button } from "antd";
 import ItemCard from "../components/ItemCard";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../context/AppContext";
+import { nanoid } from "nanoid";
 
 const ProductView = ({
   searchParameter,
@@ -8,14 +11,33 @@ const ProductView = ({
   searchParameter: string;
   setSearchParameter: React.Dispatch<React.SetStateAction<string>>;
 }) => {
+  const { getCards } = useContext(AppContext);
+
+  useEffect(() => {
+    if (searchParameter) {
+      getCards("", searchParameter);
+    }
+  }, [searchParameter]);
+
   return (
-    <Flex vertical>
-      <Breadcrumb>
-        <Breadcrumb.Item onClick={() => setSearchParameter("")}>
-          <Button type="text">Home</Button>
-        </Breadcrumb.Item>
-        <Breadcrumb.Item>{searchParameter}</Breadcrumb.Item>
-      </Breadcrumb>
+    <Flex vertical style={{ margin: "30px" }}>
+      <Breadcrumb
+        items={[
+          {
+            key: "1",
+            title: <Button type="text">Home</Button>,
+            onClick: () => setSearchParameter(""),
+          },
+          {
+            key: "2",
+            title: (
+              <Button type="text" disabled>
+                {searchParameter}
+              </Button>
+            ),
+          },
+        ]}
+      />
       <ItemCard />
     </Flex>
   );

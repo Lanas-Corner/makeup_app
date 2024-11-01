@@ -8,13 +8,6 @@ export const LayoutStyle: React.CSSProperties = {
   backgroundColor: "rgb(185, 186, 188, 0.1)",
 };
 
-export const HeaderTitleStyle: React.CSSProperties = {
-  color: "#908863",
-  textAlign: "center",
-  textTransform: "uppercase",
-  margin: "20px",
-};
-
 export const ContentStyle: React.CSSProperties = {
   width: "100%",
   display: "flex",

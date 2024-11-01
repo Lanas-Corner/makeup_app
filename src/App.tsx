@@ -13,18 +13,20 @@ function App() {
 
   return (
     <AppContextProvider>
-      <Header setShowLiked={setShowLiked} />
-      <Menu setSearchParameter={setSearchParameter} />
-      {searchParameter === "" ? (
-        <MainView />
-      ) : (
-        <ProductView
-          searchParameter={searchParameter}
-          setSearchParameter={setSearchParameter}
-        />
-      )}
+      <div className="max-w-screen-2xl mx-auto">
+        <Header setShowLiked={setShowLiked} />
+        <Menu setSearchParameter={setSearchParameter} />
+        {searchParameter === "" ? (
+          <MainView />
+        ) : (
+          <ProductView
+            searchParameter={searchParameter}
+            setSearchParameter={setSearchParameter}
+          />
+        )}
 
-      <Drawer showLiked={showLiked} setShowLiked={setShowLiked} />
+        <Drawer showLiked={showLiked} setShowLiked={setShowLiked} />
+      </div>
     </AppContextProvider>
   );
 }

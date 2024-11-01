@@ -13,9 +13,9 @@ const TitleStyle: React.CSSProperties = {
 const MainView = () => {
   return (
     <Flex justify="flex-start" style={{ height: "calc(100vh - 120px)" }}>
-      <img src={MakeupBag} width={"35%"} alt="bag" />
+      <img src={MakeupBag} height={630} alt="bag" />
       <Flex justify="center" style={{ margin: "0 auto" }}>
-        <List
+        {/* <List
           header={
             <Flex vertical>
               <Title style={TitleStyle}>{articleTitle}</Title>
@@ -32,7 +32,7 @@ const MainView = () => {
               ></List.Item.Meta>
             </List.Item>
           )}
-        />
+        /> */}
       </Flex>
     </Flex>
   );

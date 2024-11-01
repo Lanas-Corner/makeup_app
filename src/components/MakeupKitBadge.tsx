@@ -1,5 +1,5 @@
 import { Badge } from "antd";
-import { CarryOutOutlined } from "@ant-design/icons";
+import ShoppingBag from "../images/shoppingbag.png";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
@@ -16,9 +16,12 @@ const MakeupKitBadge = ({
       title="Makeup kit"
       style={{ color: "#0C0D09", boxShadow: "0 0 0 1px #0C0D09" }}
     >
-      <CarryOutOutlined
-        style={{ fontSize: "30px", color: "#908863" }}
+      <img
+        src={ShoppingBag}
         onClick={() => setShowLiked(true)}
+        alt="shopping bag"
+        width={30}
+        height={30}
       />
     </Badge>
   );

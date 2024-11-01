@@ -12,7 +12,7 @@ export const HeaderTitleStyle: React.CSSProperties = {
   color: "#908863",
   textAlign: "center",
   textTransform: "uppercase",
-  margin: "10px auto",
+  margin: "20px",
 };
 
 export const ContentStyle: React.CSSProperties = {

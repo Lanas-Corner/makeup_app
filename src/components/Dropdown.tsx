@@ -16,9 +16,9 @@ import {
 const { Text } = Typography;
 
 const DropdownOverlayStyle: CSSProperties = {
-  width: "100vw",
-  position: "fixed",
-  backgroundColor: "#a18e88",
+  maxWidth: "1440px",
+  width: "100%",
+  left: 0,
   right: 0,
   top: 120,
   borderRadius: 0,
@@ -26,11 +26,9 @@ const DropdownOverlayStyle: CSSProperties = {
 };
 
 const DropdownContainerStyle: CSSProperties = {
-  width: "100vw",
-  position: "fixed",
-  right: 0,
+  maxWidth: "1440px",
+  width: "100%",
   backgroundColor: "#a18e88",
-  borderRadius: 0,
   minHeight: "250px",
   justifyContent: "center",
   padding: "20px",

@@ -2,9 +2,13 @@ import MakeupKitBadge from "./MakeupKitBadge";
 import SearchField from "./SearchField";
 
 const Header = ({
+  setSuggestions,
   setShowLiked,
+  setIsOverlayVisible,
 }: {
+  setSuggestions: React.Dispatch<React.SetStateAction<string[]>>;
   setShowLiked: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOverlayVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
     <div className="flex justify-center items-center p-3 gap-5">
@@ -14,7 +18,10 @@ const Header = ({
           Create your makeup kit!
         </h1>
       </div>
-      <SearchField />
+      <SearchField
+        setIsOverlayVisible={setIsOverlayVisible}
+        setSuggestions={setSuggestions}
+      />
       <MakeupKitBadge setShowLiked={setShowLiked} />
     </div>
   );

@@ -1,13 +1,19 @@
-import { Select } from "antd";
 import { brandNames } from "../const/brandList";
-import { nanoid } from "nanoid";
 import { productList } from "../const/productList";
-import { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
+import SearchIcon from "../images/search.png";
 
-const { Option } = Select;
+const items: string[] = [...brandNames, ...productList];
 
-const SearchField = () => {
+const SearchField = ({
+  setIsOverlayVisible,
+  setSuggestions,
+}: {
+  setIsOverlayVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setSuggestions: React.Dispatch<React.SetStateAction<string[]>>;
+}) => {
+  const [value, setValue] = useState<string>();
   const { getCards } = useContext(AppContext);
 
   const handleSelect = (val: string) => {
@@ -19,34 +25,33 @@ const SearchField = () => {
     }
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    if (value && value.length > 1) {
+      const newOptions = items.filter((item) =>
+        item.includes(value.toLowerCase())
+      );
+      if (newOptions.length > 0) {
+        setSuggestions(newOptions);
+        setIsOverlayVisible(true);
+      } else {
+        setIsOverlayVisible(false);
+      }
+    } else {
+      setIsOverlayVisible(false);
+    }
+  };
+
   return (
-    <Select
-      style={{ width: "180px" }}
-      placeholder="Search"
-      showSearch
-      onSelect={handleSelect}
-    >
-      {brandNames.map((brand: string) => (
-        <Option
-          key={nanoid()}
-          value={brand + "_brand"}
-          className={"brand"}
-          label={brand}
-        >
-          {brand}
-        </Option>
-      ))}
-      {productList.map((product: string) => (
-        <Option
-          key={nanoid()}
-          value={product + "_product"}
-          className={"product"}
-          label={product}
-        >
-          {product}
-        </Option>
-      ))}
-    </Select>
+    <div className="flex relative bg-gray-200 p-2 gap-1 rounded-3xl">
+      <img src={SearchIcon} width={22} height={20} alt="search" />
+      <input
+        placeholder="SEARCH"
+        className="bg-inherit outline-none text-sm"
+        value={value}
+        onChange={handleChange}
+      />
+    </div>
   );
 };
 

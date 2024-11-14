@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
 import { fetchCards } from "../api";
 
+export interface ProductColor {
+  hex_value: string;
+  colour_name: string;
+}
+
 export interface Card {
   id: string;
   brand: string;
   name: string;
   image_link: string;
-  isLiked: boolean;
-  product: string;
-}
-
-interface ServerCard {
-  id: string;
-  brand: string;
-  name: string;
-  image_link: string;
-  isLiked: boolean;
+  description: string;
+  rating: number;
+  category: string;
   product_type: string;
+  tag_list: string[];
+  product_colors: ProductColor[];
 }
 
 const LS_KEY: string = "makeup_kit";
@@ -24,9 +24,6 @@ const LS_KEY: string = "makeup_kit";
 const useConfig = () => {
   const [likedCards, setLikedCards] = useState<Card[]>([]);
   const [cards, setCards] = useState<Card[]>([]);
-  const [products, setProducts] = useState<string[]>([]);
-  const [shownCards, setShownCards] = useState<Card[]>([]);
-  const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
   function updateLikedCards(cards: Card[]) {
@@ -37,10 +34,6 @@ const useConfig = () => {
   function addCard(newCard: Card) {
     const cards = likedCards.concat(newCard);
     updateLikedCards(cards);
-  }
-  function removeCard(removedCard: Card) {
-    const new_cards = shownCards.filter((card) => card.id !== removedCard.id);
-    setShownCards(new_cards);
   }
 
   function removeLikedCard(removedCard: Card) {
@@ -56,38 +49,27 @@ const useConfig = () => {
     return isLiked.length > 0;
   }
 
-  async function getCards(brand: string, product: string) {
-    const res = await fetchCards(brand, product);
+  async function getCards(query?: string) {
+    const res = await fetchCards(query);
     if (res) {
-      const fetchedCards = res.data.map((card: ServerCard) => {
+      const fetchedCards: Card[] = res.data.map((card: Card) => {
         return {
           id: card.id,
           brand: card.brand,
           name: card.name,
           image_link: card.image_link,
-          product: card.product_type,
+          description: card.description,
+          rating: card.rating,
+          category: card.category,
+          product_type: card.product_type,
+          tag_list: card.tag_list,
+          product_colors: card.product_colors,
         };
       });
       setCards(fetchedCards);
       const newProducts: string[] = [];
-      fetchedCards.map((card: Card) =>
-        newProducts.includes(card.product)
-          ? null
-          : newProducts.push(card.product)
-      );
-      setProducts(newProducts);
-      setIsDisabled(false);
       setIsError(false);
-      setShownCards(fetchedCards);
     }
-  }
-  function showCards(product: string) {
-    const res = cards.filter((card) => card.product === product);
-    setShownCards(res);
-  }
-
-  function disable() {
-    setIsDisabled(true);
   }
 
   useEffect(() => {
@@ -98,17 +80,9 @@ const useConfig = () => {
   return {
     cards,
     likedCards,
-    products,
-    shownCards,
     getCards,
-    showCards,
-    setShownCards,
     addCard,
-    removeCard,
     removeLikedCard,
-    disable,
-    isLiked,
-    isDisabled,
     isError,
   };
 };

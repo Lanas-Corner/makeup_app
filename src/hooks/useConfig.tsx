@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchCards } from "../api";
+import { getRandomBrand } from "../utils";
 
 export interface ProductColor {
   hex_value: string;
@@ -49,30 +50,61 @@ const useConfig = () => {
     return isLiked.length > 0;
   }
 
+  async function fetchRandomBrandCards() {
+    try {
+      const brand = getRandomBrand();
+      const res = await fetchCards("?brand=" + brand);
+      if (res) {
+        const fetchedCards: Card[] = res.data.map((card: Card) => {
+          return {
+            id: card.id,
+            brand: card.brand,
+            name: card.name,
+            image_link: card.image_link,
+            description: card.description,
+            rating: card.rating,
+            category: card.category,
+            product_type: card.product_type,
+            tag_list: card.tag_list,
+            product_colors: card.product_colors,
+          };
+        });
+        setCards(fetchedCards);
+        setIsError(false);
+      }
+    } catch (err) {
+      setIsError(true);
+    }
+  }
+
   async function getCards(query?: string) {
-    const res = await fetchCards(query);
-    if (res) {
-      const fetchedCards: Card[] = res.data.map((card: Card) => {
-        return {
-          id: card.id,
-          brand: card.brand,
-          name: card.name,
-          image_link: card.image_link,
-          description: card.description,
-          rating: card.rating,
-          category: card.category,
-          product_type: card.product_type,
-          tag_list: card.tag_list,
-          product_colors: card.product_colors,
-        };
-      });
-      setCards(fetchedCards);
-      const newProducts: string[] = [];
-      setIsError(false);
+    try {
+      const res = await fetchCards(query);
+      if (res) {
+        const fetchedCards: Card[] = res.data.map((card: Card) => {
+          return {
+            id: card.id,
+            brand: card.brand,
+            name: card.name,
+            image_link: card.image_link,
+            description: card.description,
+            rating: card.rating,
+            category: card.category,
+            product_type: card.product_type,
+            tag_list: card.tag_list,
+            product_colors: card.product_colors,
+          };
+        });
+        setCards(fetchedCards);
+        setIsError(false);
+      }
+    } catch (err) {
+      setIsError(true);
     }
   }
 
   useEffect(() => {
+    fetchRandomBrandCards();
     const localCards = localStorage.getItem(LS_KEY);
     setLikedCards(localCards ? JSON.parse(localCards) : []);
   }, []);

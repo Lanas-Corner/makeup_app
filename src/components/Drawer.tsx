@@ -49,7 +49,7 @@ const Drawer = ({
                   height={60}
                 />
               }
-              title={card.product}
+              title={card.product_type}
               description={card.name}
             />
           </List.Item>

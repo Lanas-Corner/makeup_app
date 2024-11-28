@@ -3,15 +3,12 @@ import AppContextProvider from "./context/AppContext";
 import Drawer from "./components/Drawer";
 import { useState } from "react";
 import Header from "./components/Header";
-import Menu from "./components/Menu";
-import MainView from "./views/MainView";
-import ProductView from "./views/ProductView";
 import SearchOverlay from "./components/SearchOverlay";
+import ProductList from "./components/ProductList";
 
 function App() {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showLiked, setShowLiked] = useState(false);
-  const [searchParameter, setSearchParameter] = useState("");
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   return (
@@ -22,17 +19,8 @@ function App() {
           setShowLiked={setShowLiked}
           setIsOverlayVisible={setIsOverlayVisible}
         />
+        <ProductList />
         {isOverlayVisible && <SearchOverlay suggestions={suggestions} />}
-        <Menu setSearchParameter={setSearchParameter} />
-        {searchParameter === "" ? (
-          <MainView />
-        ) : (
-          <ProductView
-            searchParameter={searchParameter}
-            setSearchParameter={setSearchParameter}
-          />
-        )}
-
         <Drawer showLiked={showLiked} setShowLiked={setShowLiked} />
       </div>
     </AppContextProvider>

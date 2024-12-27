@@ -1,21 +1,27 @@
 import { nanoid } from "nanoid";
 import MakeupBag from "../images/makeupbag.jpg";
 import { AppContext } from "../context/AppContext";
-import { useContext } from "react";
+import React, { useContext } from "react";
+import { normalizeSuggestion, parseQuery } from "../utils";
 
-const SearchOverlay = ({ suggestions }: { suggestions: string[] }) => {
+const SearchOverlay = ({
+  suggestions,
+  setIsOverlayVisible,
+}: {
+  suggestions: string[];
+  setIsOverlayVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const { getCards } = useContext(AppContext);
 
   const handleSelect = (val: string) => {
-    const arr = val.split("_");
-    if (arr[1] === "brand") {
-      getCards(arr[0], "");
-    } else if (arr[1] === "product") {
-      getCards("", arr[0]);
-    }
+    const query = parseQuery(val);
+    getCards(query);
+    setIsOverlayVisible(false);
   };
+
+  console.log("Visible");
   return (
-    <div className="fixed w-full bg-white z-10 p-4 pl-12 flex">
+    <div className="fixed top-16 w-full bg-white z-10 p-4 pl-12 flex">
       <div className="p-1 mr-12">
         <img src={MakeupBag} alt="makeup bag" width={130} />
       </div>
@@ -27,9 +33,11 @@ const SearchOverlay = ({ suggestions }: { suggestions: string[] }) => {
           <p
             key={nanoid()}
             className="cursor-pointer hover:bg-slate-200"
-            onClick={() => handleSelect(item)}
+            onClick={() => {
+              handleSelect(item);
+            }}
           >
-            {item}
+            {normalizeSuggestion(item)}
           </p>
         ))}
       </div>

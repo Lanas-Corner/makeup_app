@@ -1,10 +1,6 @@
-import { brandNames } from "../const/brandList";
-import { productList } from "../const/productList";
-import React, { useContext, useState } from "react";
-import { AppContext } from "../context/AppContext";
+import React, { useState } from "react";
 import SearchIcon from "../images/search.png";
-
-const items: string[] = [...brandNames, ...productList];
+import { parameters } from "../const/parameters";
 
 const SearchField = ({
   setIsOverlayVisible,
@@ -13,27 +9,22 @@ const SearchField = ({
   setIsOverlayVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setSuggestions: React.Dispatch<React.SetStateAction<string[]>>;
 }) => {
-  const [value, setValue] = useState<string>();
-  const { getCards } = useContext(AppContext);
+  const [value, setValue] = useState<string>("");
 
-  const handleSelect = (val: string) => {
-    const arr = val.split("_");
-    if (arr[1] === "brand") {
-      getCards(arr[0], "");
-    } else if (arr[1] === "product") {
-      getCards("", arr[0]);
-    }
-  };
+  function findSuggestions(value: string): string[] {
+    const options: string[] = parameters.filter((val) => val.includes(value));
+    return options;
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
-    if (value && value.length > 1) {
-      const newOptions = items.filter((item) =>
-        item.includes(value.toLowerCase())
-      );
+    if (e.target.value && e.target.value.length > 1) {
+      const newOptions = findSuggestions(e.target.value);
+      console.log(newOptions);
       if (newOptions.length > 0) {
         setSuggestions(newOptions);
         setIsOverlayVisible(true);
+        console.log("!");
       } else {
         setIsOverlayVisible(false);
       }

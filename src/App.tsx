@@ -20,7 +20,12 @@ function App() {
           setIsOverlayVisible={setIsOverlayVisible}
         />
         <ProductList />
-        {isOverlayVisible && <SearchOverlay suggestions={suggestions} />}
+        {isOverlayVisible && (
+          <SearchOverlay
+            suggestions={suggestions}
+            setIsOverlayVisible={setIsOverlayVisible}
+          />
+        )}
         <Drawer showLiked={showLiked} setShowLiked={setShowLiked} />
       </div>
     </AppContextProvider>

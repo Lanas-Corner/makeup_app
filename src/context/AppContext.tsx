@@ -5,7 +5,7 @@ import { Card } from "../hooks/useConfig";
 export type AppContextType = {
   cards: Card[];
   likedCards: Card[];
-  getCards: (brand: string, product: string) => void;
+  getCards: (query: string) => void;
   addCard: (card: Card) => void;
   removeLikedCard: (card: Card) => void;
   isError: boolean;

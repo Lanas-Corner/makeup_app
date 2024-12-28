@@ -1,9 +1,16 @@
+import { useState } from "react";
 import { Card as CardType } from "../hooks/useConfig";
 import Rating from "./Rating";
+import Placeholder from "../images/placeholder.jpg";
 
 const Card = ({ card }: { card: CardType }) => {
+  const [imageSrc, setImageSrc] = useState(card.image_link);
+
+  function handleImageError() {
+    setImageSrc(Placeholder);
+  }
   return (
-    <div className="flex flex-col box-border bg-white gap-3 px-4 py-9 items-center ">
+    <div className="flex flex-col justify-end box-border bg-white gap-3 px-4 py-9 items-center rounded-3xl">
       <div className="flex flex-wrap gap-2 justify-end ml-auto">
         {card.tag_list.length > 0 &&
           card.tag_list.map((tag, i) => (
@@ -12,10 +19,19 @@ const Card = ({ card }: { card: CardType }) => {
             </div>
           ))}
       </div>
-      <img src={card.image_link} alt="product" width={200} />
+      <img
+        src={imageSrc}
+        alt="product"
+        width={200}
+        onError={handleImageError}
+      />
       <p className="text-lg font-medium capitalize">{card.brand}</p>
       <p>{card.product_type}</p>
-      <Rating rating={card.rating} />
+      {card.rating ? (
+        <Rating rating={card.rating} />
+      ) : (
+        <p className="text-gray-400 text-sm">no rating</p>
+      )}
     </div>
   );
 };

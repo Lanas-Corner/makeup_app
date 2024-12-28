@@ -69,8 +69,8 @@ const useConfig = () => {
             product_colors: card.product_colors,
           };
         });
-        setCards(fetchedCards);
         setIsError(false);
+        return fetchedCards;
       }
     } catch (err) {
       setIsError(true);
@@ -104,7 +104,10 @@ const useConfig = () => {
   }
 
   useEffect(() => {
-    fetchRandomBrandCards();
+    fetchRandomBrandCards().then((newCards) => {
+      setCards(newCards);
+    });
+
     const localCards = localStorage.getItem(LS_KEY);
     setLikedCards(localCards ? JSON.parse(localCards) : []);
   }, []);

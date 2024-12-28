@@ -4,11 +4,11 @@ const Card = ({ card }: { card: CardType }) => {
   console.log(card.tag_list);
 
   return (
-    <div className="flex flex-col bg-white gap-3 px-4 py-9 items-center">
-      <div className="flex gap-2 ml-auto">
+    <div className="flex flex-col box-border bg-white gap-3 px-4 py-9 items-center ">
+      <div className="flex flex-wrap gap-2 justify-end ml-auto">
         {card.tag_list.length > 0 &&
           card.tag_list.map((tag, i) => (
-            <div key={i} className="px-2 py-1 bg-slate-200 ml-auto rounded-2xl">
+            <div key={i} className="px-2 py-1 bg-slate-200 rounded-2xl">
               <p>{tag}</p>
             </div>
           ))}

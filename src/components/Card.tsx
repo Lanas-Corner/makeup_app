@@ -1,8 +1,7 @@
 import { Card as CardType } from "../hooks/useConfig";
+import Rating from "./Rating";
 
 const Card = ({ card }: { card: CardType }) => {
-  console.log(card.tag_list);
-
   return (
     <div className="flex flex-col box-border bg-white gap-3 px-4 py-9 items-center ">
       <div className="flex flex-wrap gap-2 justify-end ml-auto">
@@ -16,6 +15,7 @@ const Card = ({ card }: { card: CardType }) => {
       <img src={card.image_link} alt="product" width={200} />
       <p className="text-lg font-medium capitalize">{card.brand}</p>
       <p>{card.product_type}</p>
+      <Rating rating={card.rating} />
     </div>
   );
 };

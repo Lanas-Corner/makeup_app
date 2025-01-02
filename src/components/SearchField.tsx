@@ -12,7 +12,9 @@ const SearchField = ({
   const [value, setValue] = useState<string>("");
 
   function findSuggestions(value: string): string[] {
-    const options: string[] = parameters.filter((val) => val.includes(value));
+    const options: string[] = parameters.filter((param) =>
+      param.startsWith(value)
+    );
     return options;
   }
 

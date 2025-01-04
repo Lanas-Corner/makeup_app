@@ -6,7 +6,7 @@ import Card from "./Card";
 const ProductList = () => {
   const { cards } = useContext(AppContext);
   return (
-    <div className="grid grid-cols-4 gap-7 m-4 bg-gray-100 px-14 py-20 cursor-pointer rounded-2xl">
+    <div className="grid grid-cols-4 gap-7 bg-gray-100 px-14 py-20 cursor-pointer rounded-2xl">
       {cards.length > 0 ? (
         cards.map((card, i) => <Card card={card} key={i} />)
       ) : (

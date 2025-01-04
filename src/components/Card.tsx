@@ -11,7 +11,7 @@ const Card = ({ card }: { card: CardType }) => {
   }
   return (
     <div className="flex flex-col justify-end box-border bg-white gap-3 px-4 py-9 items-center rounded-3xl">
-      <div className="flex flex-wrap gap-2 justify-end ml-auto">
+      <div className="flex flex-wrap gap-2 justify-end ml-auto mb-auto">
         {card.tag_list.length > 0 &&
           card.tag_list.map((tag, i) => (
             <div key={i} className="px-2 py-1 bg-slate-200 rounded-2xl">

@@ -1,5 +1,5 @@
 import starFilled from "../images/starRateFilled.svg";
-import starEmpty from "../images/StarRateNotFilled.svg";
+import starEmpty from "../images/starRateNotFilled.svg";
 
 const Rating = ({ rating }: { rating: number }) => {
   const stars = [1, 2, 3, 4, 5];

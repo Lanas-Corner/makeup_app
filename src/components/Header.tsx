@@ -5,10 +5,12 @@ const Header = ({
   setSuggestions,
   setShowLiked,
   setIsOverlayVisible,
+  setStartsWithNum,
 }: {
   setSuggestions: React.Dispatch<React.SetStateAction<string[]>>;
   setShowLiked: React.Dispatch<React.SetStateAction<boolean>>;
   setIsOverlayVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setStartsWithNum: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   return (
     <div className="flex justify-center items-center p-3 gap-5">
@@ -21,6 +23,7 @@ const Header = ({
       <SearchField
         setIsOverlayVisible={setIsOverlayVisible}
         setSuggestions={setSuggestions}
+        setStartsWithNum={setStartsWithNum}
       />
       <MakeupKitBadge setShowLiked={setShowLiked} />
     </div>

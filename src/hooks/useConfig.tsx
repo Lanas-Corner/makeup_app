@@ -26,6 +26,7 @@ const useConfig = () => {
   const [likedCards, setLikedCards] = useState<Card[]>([]);
   const [cards, setCards] = useState<Card[]>([]);
   const [isError, setIsError] = useState<boolean>(false);
+  const [activeCard, setActiveCard] = useState<Card | null>(null);
 
   function updateLikedCards(cards: Card[]) {
     setLikedCards(cards);
@@ -105,6 +106,7 @@ const useConfig = () => {
 
   useEffect(() => {
     fetchRandomBrandCards().then((newCards) => {
+      console.log(newCards);
       setCards(newCards);
     });
 
@@ -119,6 +121,8 @@ const useConfig = () => {
     addCard,
     removeLikedCard,
     isError,
+    activeCard,
+    setActiveCard,
   };
 };
 

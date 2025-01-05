@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Card } from "../hooks/useConfig";
 import Placeholder from "../images/placeholder.jpg";
 import Rating from "./Rating";
 import TagList from "./TagList";
 import ColorList from "./ColorList";
 import Image from "./Image";
+import { AppContext } from "../context/AppContext";
 
 const CardView = ({
   card,
@@ -14,6 +15,12 @@ const CardView = ({
   setActiveCard: React.Dispatch<React.SetStateAction<Card | null>>;
 }) => {
   const [imageSrc, setImageSrc] = useState(card.image_link);
+  const { likedCards, addCard } = useContext(AppContext);
+
+  function handleAdd(e: MouseEvent) {
+    e.stopPropagation();
+    addCard(card);
+  }
   function handleImageError() {
     setImageSrc(Placeholder);
   }
@@ -43,8 +50,15 @@ const CardView = ({
           <TagList tagList={card.tag_list} />
           <div className="border-gray-300 border-t-[1px] pt-4">
             <p>{card.description}</p>
-            <p>blabla</p>
           </div>
+          <button
+            className="mt-4 px-12 py-3 bg-black rounded-2xl text-white text-semibold w-1/3"
+            onClick={handleAdd}
+          >
+            {likedCards.some((likedCard) => likedCard.id === card.id)
+              ? "Added"
+              : "Add"}
+          </button>
         </div>
       </div>
     </div>

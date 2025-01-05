@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Card } from "../hooks/useConfig";
 import Placeholder from "../images/placeholder.jpg";
 import Rating from "./Rating";
+import TagList from "./TagList";
+import ColorList from "./ColorList";
 
 const CardView = ({
   card,
@@ -15,26 +17,34 @@ const CardView = ({
     setImageSrc(Placeholder);
   }
   return (
-    <div className="flex flex-col items-start p-6 bg-gray-100 px-14 py-20 rounded-2xl">
+    <div className="flex flex-col items-start p-6 bg-gray-100 px-14 py-12 rounded-2xl">
       <button
         onClick={() => setActiveCard(null)}
         className="p-4 mb-8 font-medium text-xl"
       >
         Back
       </button>
-      <div className="flex gap-14">
-        <div className="bg-white p-8 rounded-3xl shrink-0">
+      <div className="flex gap-14 justify-center items-center">
+        <div className="flex flex-col gap-2 items-center bg-white py-8 px-12 rounded-3xl shrink-0 h-auto">
           <img src={card.image_link} alt="card" width={300} />
+          <ColorList colorList={card.product_colors} />
         </div>
-        <div className="flex flex-col p-4 gap-5">
+        <div className="flex flex-col p-4 gap-5 w-1/2">
+          {card.rating && (
+            <div className="mt-5">
+              <Rating rating={card.rating} />
+            </div>
+          )}
           <p className="text-3xl font-medium">{card.name}</p>
-          <p>{card.brand}</p>
-          <p>{card.product_type}</p>
-          <p>{card.description}</p>
+          <p className="uppercase">
+            {card.brand}, {card.product_type}
+          </p>
+          <TagList tagList={card.tag_list} />
+          <div className="border-gray-300 border-t-[1px] pt-4">
+            <p>{card.description}</p>
+            <p>blabla</p>
+          </div>
         </div>
-      </div>
-      <div className="mt-5">
-        <Rating rating={card.rating} />
       </div>
     </div>
   );

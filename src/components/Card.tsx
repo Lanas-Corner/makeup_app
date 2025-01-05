@@ -3,6 +3,7 @@ import { Card as CardType } from "../hooks/useConfig";
 import Rating from "./Rating";
 import Placeholder from "../images/placeholder.jpg";
 import TagList from "./TagList";
+import Image from "./Image";
 
 const Card = ({
   card,
@@ -25,13 +26,8 @@ const Card = ({
       }}
     >
       <TagList tagList={card.tag_list} />
-      <img
-        src={imageSrc}
-        alt="product"
-        width={200}
-        onError={handleImageError}
-      />
-      <div className="line-clamp-2">
+      <Image imageSrc={card.image_link} isSmall />
+      <div className="min-h-14 line-clamp-2">
         <p className="font-medium text-xl text-center">{card.name}</p>
       </div>
       <p>{card.product_type}</p>

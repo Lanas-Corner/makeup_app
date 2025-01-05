@@ -8,7 +8,7 @@ const ColorList = ({ colorList }: { colorList: ProductColor[] }) => {
         colorList.map((color, i) => (
           <div
             key={i}
-            className={"p-5 rounded-full " + color.hex_value}
+            className={"p-5 rounded-full "}
             style={{ backgroundColor: color.hex_value }}
           />
         ))

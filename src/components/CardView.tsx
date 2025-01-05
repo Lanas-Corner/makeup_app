@@ -4,6 +4,7 @@ import Placeholder from "../images/placeholder.jpg";
 import Rating from "./Rating";
 import TagList from "./TagList";
 import ColorList from "./ColorList";
+import Image from "./Image";
 
 const CardView = ({
   card,
@@ -26,7 +27,7 @@ const CardView = ({
       </button>
       <div className="flex gap-14 justify-center items-center">
         <div className="flex flex-col gap-2 items-center bg-white py-8 px-12 rounded-3xl shrink-0 h-auto">
-          <img src={card.image_link} alt="card" width={300} />
+          <Image imageSrc={card.image_link} isSmall={false} />
           <ColorList colorList={card.product_colors} />
         </div>
         <div className="flex flex-col p-4 gap-5 w-1/2">

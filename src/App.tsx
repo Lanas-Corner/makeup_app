@@ -14,7 +14,7 @@ function App() {
 
   return (
     <AppContextProvider>
-      <div className="relative max-w-screen-2xl w-full mx-auto">
+      <div className="flex flex-col relative max-w-screen-2xl min-h-screen w-full mx-auto px-3 box-border">
         <Header
           setSuggestions={setSuggestions}
           setShowLiked={setShowLiked}

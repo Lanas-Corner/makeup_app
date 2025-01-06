@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import { Card } from "../hooks/useConfig";
 import Placeholder from "../images/placeholder.jpg";
 import Rating from "./Rating";
@@ -15,6 +15,10 @@ const CardView = ({
   setActiveCard: React.Dispatch<React.SetStateAction<Card | null>>;
 }) => {
   const [imageSrc, setImageSrc] = useState(card.image_link);
+  const [showDescription, setShowDescription] = useState(false);
+  const [isDescriptionOverflowing, setIsDescriptionOverflowing] =
+    useState(false);
+  const descriptionRef = useRef<HTMLDivElement>(null);
   const { likedCards, addCard } = useContext(AppContext);
 
   function handleAdd(e: MouseEvent) {
@@ -24,6 +28,14 @@ const CardView = ({
   function handleImageError() {
     setImageSrc(Placeholder);
   }
+
+  useEffect(() => {
+    if (descriptionRef.current) {
+      const { scrollHeight, clientHeight } = descriptionRef.current;
+      setIsDescriptionOverflowing(scrollHeight > clientHeight);
+    }
+  }, []);
+
   return (
     <div className="flex flex-col items-start p-6 bg-gray-100 px-14 py-12 rounded-2xl">
       <button
@@ -32,7 +44,7 @@ const CardView = ({
       >
         Back
       </button>
-      <div className="flex gap-14 justify-center items-center">
+      <div className="flex gap-14 justify-center items-start">
         <div className="flex flex-col gap-2 items-center bg-white py-8 px-12 rounded-3xl shrink-0 h-auto">
           <Image imageSrc={card.image_link} isSmall={false} />
           <ColorList colorList={card.product_colors} />
@@ -48,17 +60,31 @@ const CardView = ({
             {card.brand}, {card.product_type}
           </p>
           <TagList tagList={card.tag_list} />
-          <div className="border-gray-300 border-t-[1px] pt-4">
-            <p>{card.description}</p>
-          </div>
           <button
-            className="mt-4 px-12 py-3 bg-black rounded-2xl text-white text-semibold w-1/3"
+            className="ml-auto mt-4 px-12 py-3 bg-black rounded-2xl text-white text-semibold w-1/3"
             onClick={handleAdd}
           >
             {likedCards.some((likedCard) => likedCard.id === card.id)
               ? "Added"
               : "Add"}
           </button>
+          <div
+            className={
+              "border-gray-300 border-t-[1px] pt-4 " +
+              (!showDescription && "line-clamp-6")
+            }
+            ref={descriptionRef}
+          >
+            <p>{card.description}</p>
+          </div>
+          {isDescriptionOverflowing && (
+            <button
+              className="font-medium ml-auto"
+              onClick={() => setShowDescription(!showDescription)}
+            >
+              {showDescription ? "show less" : "show more"}
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ interface ParametersType {
 }
 
 export const parameters: string[] = [
-  ...brandNames.map((item) => item + "_brand"),
-  ...productList.map((item) => item + "_product_type"),
-  ...tagsList.map((item) => item + "_product_tags"),
+  ...brandNames.map((item) => item.toLowerCase() + "_brand"),
+  ...productList.map((item) => item.toLowerCase() + "_product_type"),
+  ...tagsList.map((item) => item.toLowerCase() + "_product_tags"),
 ];

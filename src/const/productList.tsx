@@ -5,8 +5,8 @@ export const productList: string[] = [
   "eyeliner",
   "eyeshadow",
   "foundation",
-  "lip_liner",
+  "lip liner",
   "lipstick",
   "mascara",
-  "nail_polish",
+  "nail polish",
 ];

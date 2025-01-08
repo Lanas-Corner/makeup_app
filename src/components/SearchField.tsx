@@ -21,10 +21,11 @@ const SearchField = ({
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-    setStartsWithNum(e.target.value.length);
-    if (e.target.value && e.target.value.length > 1) {
-      const newOptions = findSuggestions(e.target.value);
+    const value = e.target.value.toLowerCase();
+    setValue(value);
+    setStartsWithNum(value.length);
+    if (value && value.length > 1) {
+      const newOptions = findSuggestions(value);
       if (newOptions.length > 0) {
         setSuggestions(newOptions);
         setIsOverlayVisible(true);
@@ -37,11 +38,11 @@ const SearchField = ({
   };
 
   return (
-    <div className="flex relative bg-gray-200 p-2 gap-1 rounded-3xl">
+    <div className="flex relative bg-gray-200 p-2 gap-1 rounded-3xl focus-within:outline">
       <img src={SearchIcon} width={22} height={20} alt="search" />
       <input
         placeholder="SEARCH"
-        className="bg-inherit outline-none text-sm"
+        className="bg-inherit text-sm focus:outline-none"
         value={value}
         onChange={handleChange}
       />

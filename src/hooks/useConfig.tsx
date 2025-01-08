@@ -20,9 +20,17 @@ export interface Card {
   product_colors: ProductColor[];
 }
 
+enum SearchType {
+  Product = "product",
+  Brand = "brand",
+}
+
 const LS_KEY: string = "makeup_kit";
 
 const useConfig = () => {
+  const [searchedItem, setSearchedItem] = useState<SearchType>(
+    SearchType.Brand
+  );
   const [likedCards, setLikedCards] = useState<Card[]>([]);
   const [cards, setCards] = useState<Card[]>([]);
   const [isError, setIsError] = useState<boolean>(false);
@@ -71,6 +79,7 @@ const useConfig = () => {
           };
         });
         setIsError(false);
+        setSearchedItem(SearchType.Brand);
         return fetchedCards;
       }
     } catch (err) {
@@ -105,8 +114,7 @@ const useConfig = () => {
   }
 
   useEffect(() => {
-    fetchRandomBrandCards().then((newCards) => {
-      console.log(newCards);
+    fetchRandomBrandCards().then((newCards: Card[]) => {
       setCards(newCards);
     });
 

@@ -46,7 +46,7 @@ const CardView = ({
       </button>
       <div className="flex gap-14 justify-center items-start">
         <div className="flex flex-col gap-2 items-center bg-white py-8 px-12 rounded-3xl shrink-0 h-auto">
-          <Image imageSrc={card.image_link} isSmall={false} />
+          <Image imageSrc={card.image_link} width={300} height={350} />
           <ColorList colorList={card.product_colors} />
         </div>
         <div className="flex flex-col p-4 gap-5 w-1/2">

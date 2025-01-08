@@ -10,24 +10,26 @@ enum Status {
 
 const Image = ({
   imageSrc,
-  isSmall,
+  width,
+  height,
 }: {
   imageSrc: string;
-  isSmall: boolean;
+  width: number;
+  height: number;
 }) => {
-  //   const [src, setStc] = useState(imageSrc);
   const [status, setStatus] = useState(Status.Loading);
 
   return (
     <div>
       {(status === Status.Loading || status === Status.Failed) && (
-        <Sceleton width={isSmall ? 200 : 300} height={isSmall ? 293 : 350} />
+        <Sceleton width={width} height={height} />
       )}
       {(status === Status.Loading || status === Status.Loaded) && (
         <img
           src={imageSrc}
           alt="product"
-          width={isSmall ? 200 : 300}
+          width={width}
+          height={height}
           onLoad={() => setStatus(Status.Loaded)}
           onError={() => setStatus(Status.Failed)}
         />

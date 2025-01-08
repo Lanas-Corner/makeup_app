@@ -16,7 +16,7 @@ const Card = ({
   const [imageSrc, setImageSrc] = useState(card.image_link);
   const { likedCards, addCard } = useContext(AppContext);
 
-  function handleAdd(e: MouseEvent) {
+  function handleAdd(e: React.MouseEvent) {
     e.stopPropagation();
     addCard(card);
   }
@@ -29,7 +29,7 @@ const Card = ({
       }}
     >
       <TagList tagList={card.tag_list} />
-      <Image imageSrc={card.image_link} isSmall />
+      <Image imageSrc={card.image_link} width={200} height={293} />
       <div className="min-h-14 line-clamp-2">
         <p className="font-medium text-xl text-center">{card.name}</p>
       </div>

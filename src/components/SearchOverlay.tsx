@@ -1,23 +1,28 @@
 import { nanoid } from "nanoid";
 import MakeupBag from "../images/makeupbag.jpg";
 import { AppContext } from "../context/AppContext";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { normalizeSuggestion, parseQuery } from "../utils";
 
 const SearchOverlay = ({
   suggestions,
   setIsOverlayVisible,
   startsWithNum,
+  activeIndex,
+  setActiveIndex,
 }: {
   suggestions: string[];
   setIsOverlayVisible: React.Dispatch<React.SetStateAction<boolean>>;
   startsWithNum: number;
+  activeIndex: number;
+  setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const { getCards } = useContext(AppContext);
 
   const handleSelect = (val: string) => {
     const res = parseQuery(val);
     getCards(res.query, res.searchValue, res.searchValueType);
+    setActiveIndex(-1);
     setIsOverlayVisible(false);
   };
 
@@ -33,7 +38,10 @@ const SearchOverlay = ({
         {suggestions.map((item, i) => (
           <p
             key={nanoid()}
-            className="cursor-pointer hover:bg-slate-200"
+            className={
+              "px-3 py-1 rounded-2xl cursor-pointer hover:bg-slate-100 " +
+              (i === activeIndex && "bg-slate-100")
+            }
             onClick={() => {
               handleSelect(item);
             }}

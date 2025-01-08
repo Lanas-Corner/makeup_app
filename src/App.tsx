@@ -11,6 +11,12 @@ function App() {
   const [showLiked, setShowLiked] = useState(false);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [startsWithNum, setStartsWithNum] = useState<number>(0);
+  const [activeIndex, setActiveIndex] = useState(-1);
+
+  function handleOverlayClose() {
+    setIsOverlayVisible(false);
+    setActiveIndex(-1);
+  }
 
   return (
     <AppContextProvider>
@@ -19,7 +25,11 @@ function App() {
           setSuggestions={setSuggestions}
           setShowLiked={setShowLiked}
           setIsOverlayVisible={setIsOverlayVisible}
+          handleOverlayClose={handleOverlayClose}
           setStartsWithNum={setStartsWithNum}
+          activeIndex={activeIndex}
+          setActiveIndex={setActiveIndex}
+          suggestions={suggestions}
         />
         <ProductList />
         {isOverlayVisible && (
@@ -27,6 +37,8 @@ function App() {
             suggestions={suggestions}
             setIsOverlayVisible={setIsOverlayVisible}
             startsWithNum={startsWithNum}
+            activeIndex={activeIndex}
+            setActiveIndex={setActiveIndex}
           />
         )}
         <Drawer showLiked={showLiked} setShowLiked={setShowLiked} />

@@ -1,61 +1,40 @@
-import { Drawer as DrawerEl, List, Image } from "antd";
-import { DeleteOutlined, CloseOutlined } from "@ant-design/icons";
-import { Card as infoCard } from "../hooks/useConfig";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
+import Image from "./Image";
 
-const Drawer = ({
-  showLiked,
-  setShowLiked,
-}: {
-  showLiked: boolean;
-  setShowLiked: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const Drawer = ({ isOpen }: { isOpen: boolean }) => {
   const { likedCards, removeLikedCard } = useContext(AppContext);
+
   return (
-    <DrawerEl
-      open={showLiked}
-      onClose={() => setShowLiked(false)}
-      footer={null}
-      closable={true}
-      title="Your makeup kit"
-      placement="left"
-      closeIcon={<></>}
-      extra={<CloseOutlined key="close" onClick={() => setShowLiked(false)} />}
-    >
-      <List
-        itemLayout="horizontal"
-        locale={{ emptyText: "Empty" }}
-        dataSource={likedCards}
-        size="small"
-        renderItem={(card: infoCard) => (
-          <List.Item
-            actions={[
-              <DeleteOutlined
-                key="delete"
-                onClick={() => {
-                  removeLikedCard(card);
-                }}
-                style={{ color: "#4f3720", fontSize: "14px" }}
-              />,
-            ]}
-          >
-            <List.Item.Meta
-              avatar={
-                <Image
-                  src={card.image_link}
-                  alt={card.name}
-                  width={60}
-                  height={60}
-                />
-              }
-              title={card.product_type}
-              description={card.name}
-            />
-          </List.Item>
-        )}
-      />
-    </DrawerEl>
+    <div className="fixed t-0 left-0 h-screen w-screen bg-black bg-opacity-50 z-10">
+      <div className="fixed h-full overflow-scroll top-0 right-0 w-1/3 bg-white flex flex-col px-8 py-12 z-20 rounded-l-xl">
+        <div className="mb-6 border-gray-300 border-b-[1px] p-4 ">
+          <p className="text-2xl uppercase">Your makeup kit</p>
+        </div>
+        <div className="flex flex-col gap-4 divide-y-2">
+          {likedCards.map((card) => (
+            <div key={card.id} className="flex gap-5 pt-3">
+              <div className="shrink-0">
+                <Image imageSrc={card.image_link} width={150} height={150} />
+              </div>
+              <div className="flex flex-col gap-3 justify-start">
+                <p className="text-md font-medium">{card.name}</p>
+                <p>{card.product_type}</p>
+                <p>{card.brand}</p>
+              </div>
+              <div className="ml-auto">
+                <button
+                  className="hover:font-medium"
+                  onClick={() => removeLikedCard(card)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 

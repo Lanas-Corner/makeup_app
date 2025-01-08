@@ -9,9 +9,9 @@ export function parseQuery(val: string): string {
   const arr = val.split("_");
   if (arr[1] === "brand") {
     return "?brand=" + arr[0];
-  } else if (arr[1] === "product_type") {
+  } else if (arr[1] === "product" && arr[2] === "type") {
     return "?product_type=" + arr[0];
-  } else if (arr[1] === "product_tags") {
+  } else if (arr[1] === "product" && arr[2] === "tags") {
     return "?product_tags=" + arr[0];
   } else {
     return "?product_category=" + arr[0];

@@ -21,7 +21,7 @@ const CardView = ({
   const descriptionRef = useRef<HTMLDivElement>(null);
   const { likedCards, addCard } = useContext(AppContext);
 
-  function handleAdd(e: MouseEvent) {
+  function handleAdd(e: React.MouseEvent) {
     e.stopPropagation();
     addCard(card);
   }

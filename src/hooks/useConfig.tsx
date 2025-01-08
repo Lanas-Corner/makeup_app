@@ -20,20 +20,31 @@ export interface Card {
   product_colors: ProductColor[];
 }
 
-enum SearchType {
+export enum SearchType {
   Product = "product",
   Brand = "brand",
+  Tag = "tag",
+}
+
+export enum SearchStatusType {
+  Loading,
+  Loaded,
+  NotFound,
+  Error,
 }
 
 const LS_KEY: string = "makeup_kit";
 
 const useConfig = () => {
-  const [searchedItem, setSearchedItem] = useState<SearchType>(
+  const [searchedValue, setSearchedValue] = useState("");
+  const [searchedItemType, setSearchedItemType] = useState<SearchType>(
     SearchType.Brand
   );
   const [likedCards, setLikedCards] = useState<Card[]>([]);
   const [cards, setCards] = useState<Card[]>([]);
-  const [isError, setIsError] = useState<boolean>(false);
+  const [searchStatus, setSearchStatus] = useState<SearchStatusType>(
+    SearchStatusType.Loading
+  );
   const [activeCard, setActiveCard] = useState<Card | null>(null);
 
   function updateLikedCards(cards: Card[]) {
@@ -62,6 +73,8 @@ const useConfig = () => {
   async function fetchRandomBrandCards() {
     try {
       const brand = getRandomBrand();
+      setSearchedValue(brand);
+      setSearchedItemType(SearchType.Brand);
       const res = await fetchCards("?brand=" + brand);
       if (res) {
         const fetchedCards: Card[] = res.data.map((card: Card) => {
@@ -78,17 +91,25 @@ const useConfig = () => {
             product_colors: card.product_colors,
           };
         });
-        setIsError(false);
-        setSearchedItem(SearchType.Brand);
+        setSearchStatus(SearchStatusType.Loaded);
+        setSearchedItemType(SearchType.Brand);
         return fetchedCards;
       }
     } catch (err) {
-      setIsError(true);
+      setSearchStatus(SearchStatusType.Error);
     }
   }
 
-  async function getCards(query?: string) {
+  async function getCards(
+    query: string | undefined,
+    searchValue: string,
+    searchTypeValue: SearchType
+  ) {
     try {
+      setSearchedValue(searchValue);
+      setCards([]);
+      setSearchStatus(SearchStatusType.Loading);
+      setSearchedItemType(searchTypeValue);
       const res = await fetchCards(query);
       if (res) {
         const fetchedCards: Card[] = res.data.map((card: Card) => {
@@ -106,16 +127,18 @@ const useConfig = () => {
           };
         });
         setCards(fetchedCards);
-        setIsError(false);
+        setSearchStatus(SearchStatusType.Loaded);
       }
     } catch (err) {
-      setIsError(true);
+      setSearchStatus(SearchStatusType.Error);
     }
   }
 
   useEffect(() => {
-    fetchRandomBrandCards().then((newCards: Card[]) => {
-      setCards(newCards);
+    fetchRandomBrandCards().then((newCards?: Card[]) => {
+      if (newCards) {
+        setCards(newCards);
+      }
     });
 
     const localCards = localStorage.getItem(LS_KEY);
@@ -123,14 +146,16 @@ const useConfig = () => {
   }, []);
 
   return {
+    searchedValue,
     cards,
     likedCards,
     getCards,
     addCard,
     removeLikedCard,
-    isError,
+    searchStatus,
     activeCard,
     setActiveCard,
+    searchedItemType,
   };
 };
 

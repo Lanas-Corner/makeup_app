@@ -1,48 +1,61 @@
 import React, { ReactNode } from "react";
-import useConfig from "../hooks/useConfig";
+import useConfig, { SearchStatusType, SearchType } from "../hooks/useConfig";
 import { Card } from "../hooks/useConfig";
 
 export type AppContextType = {
+  searchedValue: string;
+  searchedItemType: SearchType;
+
   cards: Card[];
   likedCards: Card[];
-  getCards: (query: string) => void;
+  getCards: (
+    query: string | undefined,
+    searchValue: string,
+    searchTypeValue: SearchType
+  ) => void;
   addCard: (card: Card) => void;
   removeLikedCard: (card: Card) => void;
-  isError: boolean;
+  searchStatus: SearchStatusType;
   activeCard: Card | null;
   setActiveCard: React.Dispatch<React.SetStateAction<Card | null>>;
 };
 export const AppContext = React.createContext<AppContextType>({
+  searchedValue: "",
+  searchedItemType: SearchType.Brand,
   cards: [],
   likedCards: [],
   getCards: () => {},
   addCard: () => {},
   removeLikedCard: () => {},
-  isError: false,
+  searchStatus: SearchStatusType.Loading,
   activeCard: null,
   setActiveCard: () => {},
 });
 
 const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const {
+    searchedValue,
+    searchedItemType,
     cards,
     likedCards,
     getCards,
     addCard,
     removeLikedCard,
-    isError,
+    searchStatus,
     activeCard,
     setActiveCard,
   } = useConfig();
   return (
     <AppContext.Provider
       value={{
+        searchedValue,
+        searchedItemType,
         cards,
         likedCards,
         getCards,
         addCard,
         removeLikedCard,
-        isError,
+        searchStatus,
         activeCard,
         setActiveCard,
       }}

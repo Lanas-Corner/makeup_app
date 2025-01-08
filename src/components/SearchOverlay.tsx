@@ -16,8 +16,8 @@ const SearchOverlay = ({
   const { getCards } = useContext(AppContext);
 
   const handleSelect = (val: string) => {
-    const query = parseQuery(val);
-    getCards(query);
+    const res = parseQuery(val);
+    getCards(res.query, res.searchValue, res.searchValueType);
     setIsOverlayVisible(false);
   };
 

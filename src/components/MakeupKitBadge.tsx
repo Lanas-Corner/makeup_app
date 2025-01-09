@@ -1,29 +1,23 @@
-import { Badge } from "antd";
 import ShoppingBag from "../images/shoppingbag.png";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
 const MakeupKitBadge = ({
-  setShowLiked,
+  setIsDrawerOpen,
 }: {
-  setShowLiked: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { likedCards } = useContext(AppContext);
   return (
-    <Badge
-      count={likedCards.length}
-      color="#908863"
-      title="Makeup kit"
-      style={{ color: "#0C0D09", boxShadow: "0 0 0 1px #0C0D09" }}
+    <div
+      className="relative cursor-pointer"
+      onClick={() => setIsDrawerOpen(true)}
     >
-      <img
-        src={ShoppingBag}
-        onClick={() => setShowLiked(true)}
-        alt="shopping bag"
-        width={30}
-        height={30}
-      />
-    </Badge>
+      <img src={ShoppingBag} alt="shopping bag" width={30} height={30} />
+      <p className="absolute -top-3 -right-5 font-medium bg-black text-white py-[2px] px-2 rounded-full text-s">
+        {likedCards.length}
+      </p>
+    </div>
   );
 };
 

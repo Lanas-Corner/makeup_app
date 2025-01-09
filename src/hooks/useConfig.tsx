@@ -53,8 +53,10 @@ const useConfig = () => {
   }
 
   function addCard(newCard: Card) {
-    const cards = likedCards.concat(newCard);
-    updateLikedCards(cards);
+    if (!likedCards.includes(newCard)) {
+      const cards = likedCards.concat(newCard);
+      updateLikedCards(cards);
+    }
   }
 
   function removeLikedCard(removedCard: Card) {

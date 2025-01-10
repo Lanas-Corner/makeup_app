@@ -3,7 +3,7 @@ import SearchField from "./SearchField";
 
 const Header = ({
   setSuggestions,
-  setShowLiked,
+  handleDrawerOpen,
   setIsOverlayVisible,
   handleOverlayClose,
   setStartsWithNum,
@@ -12,7 +12,7 @@ const Header = ({
   suggestions,
 }: {
   setSuggestions: React.Dispatch<React.SetStateAction<string[]>>;
-  setShowLiked: React.Dispatch<React.SetStateAction<boolean>>;
+  handleDrawerOpen: () => void;
   setIsOverlayVisible: React.Dispatch<React.SetStateAction<boolean>>;
   handleOverlayClose: () => void;
   setStartsWithNum: React.Dispatch<React.SetStateAction<number>>;
@@ -37,7 +37,7 @@ const Header = ({
         setActiveIndex={setActiveIndex}
         suggestions={suggestions}
       />
-      <MakeupKitBadge setShowLiked={setShowLiked} />
+      <MakeupKitBadge handleDrawerOpen={handleDrawerOpen} />
     </div>
   );
 };

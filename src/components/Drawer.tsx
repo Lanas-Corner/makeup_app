@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { AppContext } from "../context/AppContext";
 import Image from "./Image";
 import Close from "../images/close.png";
@@ -13,36 +13,32 @@ const Drawer = ({
   const { likedCards, removeLikedCard } = useContext(AppContext);
   let drawerRef = useRef<null | HTMLDivElement>(null);
 
-  const handleClickOutside = React.useCallback(
-    (e: MouseEvent) => {
-      if (drawerRef.current && !drawerRef.current.contains(e.target as Node)) {
-        console.log("clicked outside");
-        handleDrawerClose();
-      }
-    },
-    [handleDrawerClose]
-  );
+  const handleClickOutside = (e: MouseEvent) => {
+    if (drawerRef.current && !drawerRef.current.contains(e.target as Node)) {
+      handleDrawerClose();
+    }
+  };
 
   useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [handleClickOutside]);
+  }, []);
 
   return (
     <div
       className={
         !isDrawerOpen
-          ? "hidden"
-          : "fixed t-0 left-0 h-screen w-screen bg-black bg-opacity-50 z-10 "
+          ? "invisible"
+          : "visible fixed t-0 left-0 h-screen w-screen bg-black bg-opacity-50 z-10 transition-all duration-300"
       }
     >
       <div
-        className="fixed h-full overflow-scroll top-0 right-0 w-1/3 bg-white flex flex-col px-8 py-12 z-20 rounded-l-xl"
+        className={`fixed h-full overflow-y-auto right-0 w-1/3 bg-white flex flex-col px-8 py-12 z-20 rounded-l-xl transition-transform duration-300
+          ${isDrawerOpen ? "translate-x-0  " : "translate-x-full "}`}
         ref={drawerRef}
-        // onClick={handleClickInside}
       >
         <div className="flex mb-6 border-gray-300 border-b-[1px] p-4 justify-between">
           <p className="text-2xl uppercase">Your makeup kit</p>

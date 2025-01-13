@@ -1,7 +1,7 @@
 import "./App.css";
 import AppContextProvider from "./context/AppContext";
 import Drawer from "./components/Drawer";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import Header from "./components/Header";
 import SearchOverlay from "./components/SearchOverlay";
 import ProductList from "./components/ProductList";
@@ -27,8 +27,6 @@ function App() {
     setIsOverlayVisible(false);
     setActiveIndex(-1);
   }
-
-  console.log(isDrawerOpen);
 
   return (
     <AppContextProvider>

@@ -1,6 +1,5 @@
 import { useContext, useState, useRef, useEffect } from "react";
 import { Card } from "../hooks/useConfig";
-import Placeholder from "../images/placeholder.jpg";
 import Rating from "./Rating";
 import TagList from "./TagList";
 import ColorList from "./ColorList";
@@ -24,9 +23,6 @@ const CardView = ({
   function handleAdd(e: React.MouseEvent) {
     e.stopPropagation();
     addCard(card);
-  }
-  function handleImageError() {
-    setImageSrc(Placeholder);
   }
 
   useEffect(() => {

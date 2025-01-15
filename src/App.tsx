@@ -1,4 +1,3 @@
-import "./App.css";
 import AppContextProvider from "./context/AppContext";
 import Drawer from "./components/Drawer";
 import { useCallback, useState } from "react";

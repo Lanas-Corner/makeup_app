@@ -57,7 +57,9 @@ const CardView = ({
           )}
           <p className="text-3xl font-medium">{card.name}</p>
           <p className="uppercase">
-            {card.brand}, {card.product_type}
+            {card.brand && <span>{card.brand}</span>}
+            {card.brand && card.product_type && ", "}
+            {card.product_type && <span>{card.product_type}</span>}
           </p>
           <TagList tagList={card.tag_list} />
           <button

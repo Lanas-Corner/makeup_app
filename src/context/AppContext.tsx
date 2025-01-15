@@ -1,5 +1,9 @@
 import React, { ReactNode } from "react";
-import useConfig, { SearchStatusType, SearchType } from "../hooks/useConfig";
+import useConfig, {
+  SearchStatusType,
+  SearchType,
+  AvailableFiltersType,
+} from "../hooks/useConfig";
 import { Card } from "../hooks/useConfig";
 
 export type AppContextType = {
@@ -18,6 +22,7 @@ export type AppContextType = {
   searchStatus: SearchStatusType;
   activeCard: Card | null;
   setActiveCard: React.Dispatch<React.SetStateAction<Card | null>>;
+  availableFilterOptions: AvailableFiltersType;
 };
 export const AppContext = React.createContext<AppContextType>({
   searchedValue: "",
@@ -30,6 +35,7 @@ export const AppContext = React.createContext<AppContextType>({
   searchStatus: SearchStatusType.Loading,
   activeCard: null,
   setActiveCard: () => {},
+  availableFilterOptions: { products: [], brands: [], tags: [] },
 });
 
 const AppContextProvider = ({ children }: { children: ReactNode }) => {
@@ -44,6 +50,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     searchStatus,
     activeCard,
     setActiveCard,
+    availableFilterOptions,
   } = useConfig();
   return (
     <AppContext.Provider
@@ -58,6 +65,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
         searchStatus,
         activeCard,
         setActiveCard,
+        availableFilterOptions,
       }}
     >
       {children}

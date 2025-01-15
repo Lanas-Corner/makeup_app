@@ -38,3 +38,7 @@ export function parseQuery(val: string) {
 export function normalizeSuggestion(val: string): string {
   return val.split("_")[0];
 }
+
+export function normalizeName(val: string): string {
+  return val.split("_").join(" ");
+}

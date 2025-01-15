@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import { Key, useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import Spinner from "./Spinner";
 import Card from "./Card";
 import CardView from "./CardView";
 import { SearchStatusType } from "../hooks/useConfig";
+import { normalizeName, normalizeSuggestion } from "../utils";
 
 const ProductList = () => {
   const {
@@ -13,7 +14,9 @@ const ProductList = () => {
     searchStatus,
     searchedValue,
     searchedItemType,
+    availableFilterOptions,
   } = useContext(AppContext);
+  console.log(availableFilterOptions);
   return (
     <div className="grow bg-gray-100 my-8 rounded-2xl">
       {searchStatus === SearchStatusType.Loading ? (
@@ -30,6 +33,18 @@ const ProductList = () => {
             {cards.length} Results for "{searchedValue.toUpperCase()}"{" "}
             {searchedItemType}
           </p>
+          <div className="flex flex-wrap gap-5 mb-6">
+            {Object.entries(availableFilterOptions).map(([key, val], i) => {
+              return val.map((option: string, i: number) => (
+                <button
+                  key={i}
+                  className="bg-white px-5 py-1 rounded-3xl capitalize"
+                >
+                  {normalizeName(option)}
+                </button>
+              ));
+            })}
+          </div>
           <div className="grid grid-cols-4 gap-7 box-border">
             {cards.map((card, i) => (
               <Card card={card} setActiveCard={setActiveCard} key={i} />

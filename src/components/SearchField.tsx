@@ -55,7 +55,6 @@ const SearchField = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    console.log(e.key);
     switch (e.key) {
       case "ArrowDown": {
         setActiveIndex((i) => (i + 1) % suggestions.length);

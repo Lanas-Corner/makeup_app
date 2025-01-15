@@ -10,7 +10,7 @@ import { Card } from "../hooks/useConfig";
 export type AppContextType = {
   searchedValue: string;
   searchedItemType: SearchType;
-
+  fetchRandomBrandCards: () => void;
   cards: Card[];
   likedCards: Card[];
   getCards: (
@@ -32,6 +32,7 @@ export type AppContextType = {
 export const AppContext = React.createContext<AppContextType>({
   searchedValue: "",
   searchedItemType: SearchType.Brand,
+  fetchRandomBrandCards: () => {},
   cards: [],
   likedCards: [],
   getCards: () => {},
@@ -51,6 +52,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const {
     searchedValue,
     searchedItemType,
+    fetchRandomBrandCards,
     cards,
     likedCards,
     getCards,
@@ -70,6 +72,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
       value={{
         searchedValue,
         searchedItemType,
+        fetchRandomBrandCards,
         cards,
         likedCards,
         getCards,

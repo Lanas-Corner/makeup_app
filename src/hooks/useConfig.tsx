@@ -150,6 +150,7 @@ const useConfig = () => {
 
   async function fetchRandomBrandCards() {
     try {
+      setSearchStatus(SearchStatusType.Loading);
       const brand = getRandomBrand();
       setSearchedValue(brand);
       setSearchedItemType(SearchType.Brand);
@@ -172,7 +173,10 @@ const useConfig = () => {
         });
         setSearchStatus(SearchStatusType.Loaded);
         setSearchedItemType(SearchType.Brand);
-        return fetchedCards;
+        setCards(fetchedCards);
+        if (fetchedCards.length > 1) {
+          updateAvailableFilterOptions(fetchedCards, SearchType.Brand);
+        }
       }
     } catch (err) {
       setSearchStatus(SearchStatusType.Error);
@@ -257,15 +261,7 @@ const useConfig = () => {
   }
 
   useEffect(() => {
-    fetchRandomBrandCards().then((newCards?: Card[]) => {
-      if (newCards) {
-        setCards(newCards);
-        if (newCards.length > 1) {
-          updateAvailableFilterOptions(newCards, SearchType.Brand);
-        }
-      }
-    });
-
+    fetchRandomBrandCards();
     const localCards = localStorage.getItem(LS_KEY);
     setLikedCards(localCards ? JSON.parse(localCards) : []);
   }, []);
@@ -286,6 +282,7 @@ const useConfig = () => {
     appliedFilters,
     filteredCards,
     removeFilter,
+    fetchRandomBrandCards,
   };
 };
 

@@ -1,13 +1,16 @@
-import { Key, useContext, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import Spinner from "./Spinner";
 import Card from "./Card";
 import CardView from "./CardView";
 import { SearchStatusType, SearchType } from "../hooks/useConfig";
 import { normalizeName } from "../utils";
+import Image from "./Image";
+import Refresh from "../images/refresh.png";
 
 const ProductList = () => {
   const {
+    fetchRandomBrandCards,
     cards,
     activeCard,
     setActiveCard,
@@ -20,7 +23,6 @@ const ProductList = () => {
     filteredCards,
     removeFilter,
   } = useContext(AppContext);
-  console.log(availableFilterOptions);
 
   return (
     <div className="grow bg-gray-100 my-8 rounded-2xl">
@@ -34,10 +36,15 @@ const ProductList = () => {
         <CardView card={activeCard} setActiveCard={setActiveCard} />
       ) : (
         <div className="px-14 py-12">
-          <p className="font-medium text-xl mb-5">
-            {filteredCards.length > 0 ? filteredCards.length : cards.length}{" "}
-            Results for "{searchedValue.toUpperCase()}" {searchedItemType}
-          </p>
+          <div className="flex gap-4">
+            <button onClick={() => fetchRandomBrandCards()}>
+              <Image imageSrc={Refresh} width={30} height={30} />
+            </button>
+            <p className="font-medium text-xl my-5">
+              {filteredCards.length > 0 ? filteredCards.length : cards.length}{" "}
+              Results for "{searchedValue.toUpperCase()}" {searchedItemType}
+            </p>
+          </div>
           {
             <div className="flex flex-wrap gap-5 mb-6">
               {Object.entries(appliedFilters).map(([key, val], i) => {

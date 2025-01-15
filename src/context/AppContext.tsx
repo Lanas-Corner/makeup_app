@@ -2,7 +2,8 @@ import React, { ReactNode } from "react";
 import useConfig, {
   SearchStatusType,
   SearchType,
-  AvailableFiltersType,
+  FiltersType,
+  emptyFilters,
 } from "../hooks/useConfig";
 import { Card } from "../hooks/useConfig";
 
@@ -22,7 +23,11 @@ export type AppContextType = {
   searchStatus: SearchStatusType;
   activeCard: Card | null;
   setActiveCard: React.Dispatch<React.SetStateAction<Card | null>>;
-  availableFilterOptions: AvailableFiltersType;
+  availableFilterOptions: FiltersType;
+  applyFilter: (name: string, filterType: SearchType) => void;
+  appliedFilters: FiltersType;
+  filteredCards: Card[];
+  removeFilter: (name: string, filterType: SearchType) => void;
 };
 export const AppContext = React.createContext<AppContextType>({
   searchedValue: "",
@@ -35,7 +40,11 @@ export const AppContext = React.createContext<AppContextType>({
   searchStatus: SearchStatusType.Loading,
   activeCard: null,
   setActiveCard: () => {},
-  availableFilterOptions: { products: [], brands: [], tags: [] },
+  availableFilterOptions: emptyFilters,
+  applyFilter: () => {},
+  appliedFilters: emptyFilters,
+  filteredCards: [],
+  removeFilter: () => {},
 });
 
 const AppContextProvider = ({ children }: { children: ReactNode }) => {
@@ -51,6 +60,10 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     activeCard,
     setActiveCard,
     availableFilterOptions,
+    applyFilter,
+    appliedFilters,
+    filteredCards,
+    removeFilter,
   } = useConfig();
   return (
     <AppContext.Provider
@@ -66,6 +79,10 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
         activeCard,
         setActiveCard,
         availableFilterOptions,
+        applyFilter,
+        appliedFilters,
+        filteredCards,
+        removeFilter,
       }}
     >
       {children}

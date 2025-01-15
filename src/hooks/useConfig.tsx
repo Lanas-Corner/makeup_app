@@ -20,6 +20,11 @@ export interface Card {
   product_colors: ProductColor[];
 }
 
+interface FilterType {
+  name: string;
+  count: number;
+}
+
 export enum SearchType {
   Product = "product",
   Brand = "brand",
@@ -32,13 +37,13 @@ export enum SearchStatusType {
   NotFound,
   Error,
 }
+export type FiltersType = Record<SearchType, string[]>;
 
-export interface AvailableFiltersType {
-  products: string[];
-  brands: string[];
-  tags: string[];
-}
-
+export const emptyFilters: FiltersType = {
+  product: [],
+  brand: [],
+  tag: [],
+};
 const LS_KEY: string = "makeup_kit";
 
 const useConfig = () => {
@@ -53,9 +58,10 @@ const useConfig = () => {
   );
   const [activeCard, setActiveCard] = useState<Card | null>(null);
   const [availableFilterOptions, setAvailableFilterOptions] =
-    useState<AvailableFiltersType>({ products: [], brands: [], tags: [] });
-  const [filters, setFilters] = useState<string[]>([]);
-  const [filteredCards, setFilteredCards] = useState<Card[]>();
+    useState<FiltersType>(emptyFilters);
+  const [appliedFilters, setAppliedFilters] =
+    useState<FiltersType>(emptyFilters);
+  const [filteredCards, setFilteredCards] = useState<Card[]>([]);
 
   function updateLikedCards(cards: Card[]) {
     setLikedCards(cards);
@@ -80,11 +86,6 @@ const useConfig = () => {
       (likedCard) => likedCard.id === card.id && isLiked.push(card)
     );
     return isLiked.length > 0;
-  }
-
-  interface FilterType {
-    name: string;
-    count: number;
   }
 
   function incrementCount(optionsArray: FilterType[], name: string) {
@@ -125,26 +126,25 @@ const useConfig = () => {
           }
           break;
       }
-      if (searchedItemType !== SearchType.Tag) {
-        card.tag_list?.forEach((tag) => {
-          if (tag) {
-            incrementCount(availableTags, tag);
-          }
-        });
-      }
+
+      card.tag_list?.forEach((tag) => {
+        if (tag) {
+          incrementCount(availableTags, tag);
+        }
+      });
     });
 
     setAvailableFilterOptions(() => {
-      let brands: string[] = availableBrands
+      let brand: string[] = availableBrands
         .filter((val) => val.count < cards.length)
         .map((filter) => filter.name);
-      let products: string[] = availableProducts
+      let product: string[] = availableProducts
         .filter((val) => val.count < cards.length)
         .map((filter) => filter.name);
-      let tags: string[] = availableTags
+      let tag: string[] = availableTags
         .filter((val) => val.count < cards.length)
         .map((filter) => filter.name);
-      return { brands, products, tags };
+      return { brand, product, tag };
     });
   };
 
@@ -153,6 +153,7 @@ const useConfig = () => {
       const brand = getRandomBrand();
       setSearchedValue(brand);
       setSearchedItemType(SearchType.Brand);
+      setAvailableFilterOptions(emptyFilters);
       const res = await fetchCards("?brand=" + brand);
       if (res) {
         const fetchedCards: Card[] = res.data.map((card: Card) => {
@@ -187,7 +188,7 @@ const useConfig = () => {
       setSearchedValue(searchValue);
       setCards([]);
       setSearchStatus(SearchStatusType.Loading);
-      setAvailableFilterOptions({ products: [], brands: [], tags: [] });
+      setAvailableFilterOptions(emptyFilters);
       setSearchedItemType(searchTypeValue);
       const res = await fetchCards(query);
       if (res) {
@@ -216,23 +217,43 @@ const useConfig = () => {
     }
   }
 
-  function filterCards(cards: Card[], newFilter: string) {
-    let filterParam = newFilter.split("_");
-    let filteredCards: Card[] = [];
-    if (filterParam[1] === SearchType.Brand) {
-      filteredCards = cards.filter((card) => card.brand === filterParam[0]);
-    } else if (filterParam[1] === SearchType.Product) {
-      filteredCards = cards.filter(
-        (card) => card.product_type === filterParam[0]
+  function filterCards(filters: FiltersType) {
+    let filteredCards: Card[] = cards;
+    if (filters.brand.length > 0) {
+      filteredCards = filteredCards.filter((card) =>
+        filters.brand.includes(card.brand)
       );
-    } else {
-      filteredCards = cards.filter((card) =>
-        card.tag_list.includes(filterParam[0])
+    }
+    if (filters.product.length > 0) {
+      filteredCards = filteredCards.filter((card) =>
+        filters.product.includes(card.product_type)
+      );
+    }
+    if (filters.tag.length > 0) {
+      filteredCards = filteredCards.filter((card) =>
+        filters.tag.some((tag) => card.tag_list.includes(tag))
       );
     }
     setFilteredCards(filteredCards);
-    setFilters([...filters, newFilter]);
-    // updateAvailableFilterOptions(filteredCards);
+    updateAvailableFilterOptions(filteredCards, searchedItemType);
+  }
+
+  function applyFilter(name: string, filterType: SearchType) {
+    let newFilters: FiltersType = {
+      ...appliedFilters,
+      [filterType]: [...appliedFilters[filterType], name],
+    };
+    setAppliedFilters(newFilters);
+    filterCards(newFilters);
+  }
+
+  function removeFilter(name: string, filterType: SearchType) {
+    let newFilters: FiltersType = {
+      ...appliedFilters,
+      [filterType]: appliedFilters[filterType].filter((val) => val !== name),
+    };
+    setAppliedFilters(newFilters);
+    filterCards(newFilters);
   }
 
   useEffect(() => {
@@ -261,6 +282,10 @@ const useConfig = () => {
     setActiveCard,
     searchedItemType,
     availableFilterOptions,
+    applyFilter,
+    appliedFilters,
+    filteredCards,
+    removeFilter,
   };
 };
 

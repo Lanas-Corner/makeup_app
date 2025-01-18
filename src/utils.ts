@@ -1,4 +1,5 @@
 import { brandNames } from "./const/brandList";
+import { productList } from "./const/productList";
 import { SearchType } from "./hooks/useConfig";
 
 export function getRandomBrand() {
@@ -41,4 +42,26 @@ export function normalizeSuggestion(val: string): string {
 
 export function normalizeName(val: string): string {
   return val.split("_").join(" ");
+}
+
+export function checkType(val: string) {
+  if (brandNames.includes(val)) {
+    return {
+      query: "?brand=" + val,
+      searchValue: val,
+      searchValueType: SearchType.Brand,
+    };
+  } else if (productList.includes(val)) {
+    return {
+      query: "?product_type=" + val,
+      searchValue: val,
+      searchValueType: SearchType.Product,
+    };
+  } else {
+    return {
+      query: "?product_tags=" + val,
+      searchValue: val,
+      searchValueType: SearchType.Tag,
+    };
+  }
 }

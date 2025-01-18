@@ -48,6 +48,8 @@ function App() {
             startsWithNum={startsWithNum}
             activeIndex={activeIndex}
             setActiveIndex={setActiveIndex}
+            setSuggestions={setSuggestions}
+            setStartsWithNum={setStartsWithNum}
           />
         )}
         <Drawer

@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import SearchIcon from "../images/search.png";
 import { AppContext } from "../context/AppContext";
 import { parameters } from "../const/parameters";
-import { normalizeSuggestion, parseQuery } from "../utils";
+import { checkType, normalizeSuggestion, parseQuery } from "../utils";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 const SearchField = ({
   setIsOverlayVisible,
@@ -22,7 +23,7 @@ const SearchField = ({
   suggestions: string[];
 }) => {
   const [value, setValue] = useState<string>("");
-  const { getCards } = useContext(AppContext);
+  const { cards, getCards } = useContext(AppContext);
 
   function findSuggestions(value: string): string[] {
     const options: string[] = parameters.filter((param) =>
@@ -48,16 +49,13 @@ const SearchField = ({
     }
   };
 
-  // const handleOverlaySelect = (val: string) => {
-  //   console.log(val);
-  //   const res = parseQuery(val);
-  //   getCards(res.query, res.searchValue, res.searchValueType);
-  //   setActiveIndex(-1);
-  //   setIsOverlayVisible(false);
-  // };
+  const handleOverlaySelect = (val: string) => {
+    const res = parseQuery(val);
+    getCards(res.query, res.searchValue, res.searchValueType);
+    handleOverlayClose();
+  };
 
-  const handleInputSelect = (val: string) => {
-    console.log(val);
+  const handleSelect = (val: string) => {
     const res = checkType(val);
     getCards(res.query, res.searchValue, res.searchValueType);
     handleOverlayClose();
@@ -78,7 +76,7 @@ const SearchField = ({
       case "Enter": {
         if (activeIndex > -1 && activeIndex < suggestions.length) {
           setValue(normalizeSuggestion(suggestions[activeIndex]));
-          handleSelect(suggestions[activeIndex]);
+          handleOverlaySelect(suggestions[activeIndex]);
           break;
         } else {
           handleSelect(value);
@@ -95,6 +93,16 @@ const SearchField = ({
     }
   };
 
+  useEffect(() => {
+    setValue("");
+  }, [cards.length]);
+
+  // return isMobile ? (
+  //   <div>
+  //     <img src={SearchIcon} width={50} height={50} alt="search" />
+  //   </div>
+  // ) :
+  // (
   return (
     <div
       className="flex relative bg-gray-200 p-2 gap-1 rounded-3xl focus-within:outline"
@@ -109,6 +117,7 @@ const SearchField = ({
       />
     </div>
   );
+  // );
 };
 
 export default SearchField;

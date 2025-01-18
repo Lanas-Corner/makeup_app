@@ -25,7 +25,7 @@ const ProductList = () => {
   } = useContext(AppContext);
 
   return (
-    <div className="grow bg-gray-100 my-8 rounded-2xl">
+    <div className="grow my-8 rounded-2xl">
       {searchStatus === SearchStatusType.Loading ? (
         <Spinner size={56} />
       ) : searchStatus === SearchStatusType.Error ? (

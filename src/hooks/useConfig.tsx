@@ -151,10 +151,11 @@ const useConfig = () => {
   async function fetchRandomBrandCards() {
     try {
       setSearchStatus(SearchStatusType.Loading);
+      resetFilter();
       const brand = getRandomBrand();
       setSearchedValue(brand);
       setSearchedItemType(SearchType.Brand);
-      setAvailableFilterOptions(emptyFilters);
+
       const res = await fetchCards("?brand=" + brand);
       if (res) {
         const fetchedCards: Card[] = res.data.map((card: Card) => {
@@ -173,6 +174,7 @@ const useConfig = () => {
         });
         setSearchStatus(SearchStatusType.Loaded);
         setSearchedItemType(SearchType.Brand);
+
         setCards(fetchedCards);
         if (fetchedCards.length > 1) {
           updateAvailableFilterOptions(fetchedCards, SearchType.Brand);
@@ -183,6 +185,12 @@ const useConfig = () => {
     }
   }
 
+  function resetFilter() {
+    setAvailableFilterOptions(emptyFilters);
+    setAppliedFilters(emptyFilters);
+    setFilteredCards([]);
+  }
+
   async function getCards(
     query: string | undefined,
     searchValue: string,
@@ -191,8 +199,8 @@ const useConfig = () => {
     try {
       setSearchedValue(searchValue);
       setCards([]);
+      resetFilter();
       setSearchStatus(SearchStatusType.Loading);
-      setAvailableFilterOptions(emptyFilters);
       setSearchedItemType(searchTypeValue);
       const res = await fetchCards(query);
       if (res) {

@@ -33,7 +33,7 @@ const CardView = ({
   }, []);
 
   return (
-    <div className="flex flex-col items-start p-6 bg-gray-100 px-14 py-12 rounded-2xl">
+    <div className="flex flex-col items-start p-6 px-14 py-12 rounded-2xl">
       <button
         onClick={() => setActiveCard(null)}
         className="p-4 mb-8 font-medium text-xl"

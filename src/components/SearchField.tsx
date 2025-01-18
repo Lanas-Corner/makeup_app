@@ -48,8 +48,17 @@ const SearchField = ({
     }
   };
 
-  const handleSelect = (val: string) => {
-    const res = parseQuery(val);
+  // const handleOverlaySelect = (val: string) => {
+  //   console.log(val);
+  //   const res = parseQuery(val);
+  //   getCards(res.query, res.searchValue, res.searchValueType);
+  //   setActiveIndex(-1);
+  //   setIsOverlayVisible(false);
+  // };
+
+  const handleInputSelect = (val: string) => {
+    console.log(val);
+    const res = checkType(val);
     getCards(res.query, res.searchValue, res.searchValueType);
     handleOverlayClose();
   };

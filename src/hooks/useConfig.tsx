@@ -222,7 +222,11 @@ const useConfig = () => {
         if (cards.length > 1) {
           updateAvailableFilterOptions(fetchedCards, searchTypeValue);
         }
-        setSearchStatus(SearchStatusType.Loaded);
+        if (cards.length > 0) {
+          setSearchStatus(SearchStatusType.Loaded);
+        } else {
+          setSearchStatus(SearchStatusType.NotFound);
+        }
       }
     } catch (err) {
       setSearchStatus(SearchStatusType.Error);

@@ -1,14 +1,14 @@
-import React from "react";
-import { ProductColor } from "../hooks/useConfig";
+import React from 'react';
+import { ProductColor } from '../hooks/useConfig';
 
 const ColorList = ({ colorList }: { colorList: ProductColor[] }) => {
   return (
-    <div className="flex flex-wrap p-2 w-80 gap-5 justify-center">
+    <div className="flex w-80 flex-wrap justify-center gap-5 p-2">
       {colorList.length > 0 ? (
         colorList.map((color, i) => (
           <div
             key={i}
-            className={"p-5 rounded-full "}
+            className={'rounded-full p-5'}
             style={{ backgroundColor: color.hex_value }}
           />
         ))

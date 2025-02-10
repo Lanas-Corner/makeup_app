@@ -1,11 +1,11 @@
-import { MouseEventHandler, useContext, useState } from "react";
-import { Card as CardType } from "../hooks/useConfig";
-import Rating from "./Rating";
-import Placeholder from "../images/placeholder.jpg";
-import TagList from "./TagList";
-import Image from "./Image";
-import { AppContext } from "../context/AppContext";
-import { normalizeName } from "../utils";
+import { MouseEventHandler, useContext, useState } from 'react';
+import { Card as CardType } from '../hooks/useConfig';
+import Rating from './Rating';
+import Placeholder from '../images/placeholder.jpg';
+import TagList from './TagList';
+import Image from './Image';
+import { AppContext } from '../context/AppContext';
+import { normalizeName } from '../utils';
 
 const Card = ({
   card,
@@ -23,29 +23,29 @@ const Card = ({
   }
   return (
     <div
-      className="flex flex-col justify-end box-border bg-white gap-3 px-4 py-9 items-center rounded-3xl cursor-pointer"
+      className="box-border flex cursor-pointer flex-col items-center justify-end gap-3 rounded-3xl bg-white px-4 py-9"
       onClick={() => {
         setActiveCard(card);
       }}
     >
       <TagList tagList={card.tag_list} />
       <Image imageSrc={card.image_link} width={200} height={293} />
-      <div className="min-h-14 line-clamp-2">
-        <p className="font-medium text-xl text-center">{card.name}</p>
+      <div className="line-clamp-2 min-h-14">
+        <p className="text-center text-xl font-medium">{card.name}</p>
       </div>
       <p>{normalizeName(card.product_type)}</p>
       {card.rating ? (
         <Rating rating={card.rating} />
       ) : (
-        <p className="text-gray-400 text-sm">no rating</p>
+        <p className="text-sm text-gray-400">no rating</p>
       )}
       <button
-        className="mt-4 px-12 py-3 bg-black rounded-2xl text-white text-semibold"
+        className="text-semibold mt-4 rounded-2xl bg-black px-12 py-3 text-white"
         onClick={handleAdd}
       >
         {likedCards.some((likedCard) => likedCard.id === card.id)
-          ? "Added"
-          : "Add"}
+          ? 'Added'
+          : 'Add'}
       </button>
     </div>
   );

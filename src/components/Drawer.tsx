@@ -1,7 +1,7 @@
-import { useContext, useEffect, useRef } from "react";
-import { AppContext } from "../context/AppContext";
-import Image from "./Image";
-import Close from "../images/close.png";
+import { useContext, useEffect, useRef } from 'react';
+import { AppContext } from '../context/AppContext';
+import Image from './Image';
+import Close from '../images/close.png';
 
 const Drawer = ({
   handleDrawerClose,
@@ -20,10 +20,10 @@ const Drawer = ({
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -31,16 +31,15 @@ const Drawer = ({
     <div
       className={
         !isDrawerOpen
-          ? "invisible"
-          : "visible fixed t-0 left-0 h-screen w-screen bg-black bg-opacity-50 z-10 transition-all duration-300"
+          ? 'invisible'
+          : 't-0 visible fixed left-0 z-10 h-screen w-screen bg-black bg-opacity-50 transition-all duration-300'
       }
     >
       <div
-        className={`fixed h-full overflow-y-auto right-0 w-1/3 bg-white flex flex-col px-8 py-12 z-20 rounded-l-xl transition-transform duration-300
-          ${isDrawerOpen ? "translate-x-0  " : "translate-x-full "}`}
+        className={`fixed right-0 z-20 flex h-full w-1/3 flex-col overflow-y-auto rounded-l-xl bg-white px-8 py-12 transition-transform duration-300 ${isDrawerOpen ? 'translate-x-0' : 'translate-x-full'}`}
         ref={drawerRef}
       >
-        <div className="flex mb-6 border-gray-300 border-b-[1px] p-4 justify-between">
+        <div className="mb-6 flex justify-between border-b-[1px] border-gray-300 p-4">
           <p className="text-2xl uppercase">Your makeup kit</p>
           <div className="cursor-pointer" onClick={handleDrawerClose}>
             <Image imageSrc={Close} width={30} height={30} />
@@ -52,7 +51,7 @@ const Drawer = ({
               <div className="shrink-0">
                 <Image imageSrc={card.image_link} width={150} height={150} />
               </div>
-              <div className="flex flex-col gap-3 justify-start">
+              <div className="flex flex-col justify-start gap-3">
                 <p className="text-md font-medium">{card.name}</p>
                 <p>{card.product_type}</p>
                 <p>{card.brand}</p>

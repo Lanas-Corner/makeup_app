@@ -1,9 +1,9 @@
-import AppContextProvider from "./context/AppContext";
-import Drawer from "./components/Drawer";
-import { useCallback, useState } from "react";
-import Header from "./components/Header";
-import SearchOverlay from "./components/SearchOverlay";
-import ProductList from "./components/ProductList";
+import AppContextProvider from './context/AppContext';
+import Drawer from './components/Drawer';
+import { useCallback, useState } from 'react';
+import Header from './components/Header';
+import SearchOverlay from './components/SearchOverlay';
+import ProductList from './components/ProductList';
 
 function App() {
   const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -29,7 +29,7 @@ function App() {
 
   return (
     <AppContextProvider>
-      <div className="flex flex-col relative max-w-screen-2xl min-h-screen w-full mx-auto px-3 box-border">
+      <div className="relative mx-auto box-border flex min-h-screen w-full max-w-screen-2xl flex-col px-3">
         <Header
           setSuggestions={setSuggestions}
           handleDrawerOpen={handleDrawerOpen}

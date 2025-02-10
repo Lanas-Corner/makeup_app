@@ -1,6 +1,6 @@
-import { brandNames } from "./brandList";
-import { productList } from "./productList";
-import { tagsList } from "./tagsList";
+import { brandNames } from './brandList';
+import { productList } from './productList';
+import { tagsList } from './tagsList';
 
 interface ParametersType {
   product_type: string[];
@@ -10,7 +10,7 @@ interface ParametersType {
 }
 
 export const parameters: string[] = [
-  ...brandNames.map((item) => item.toLowerCase() + "_brand"),
-  ...productList.map((item) => item.toLowerCase() + "_product_type"),
-  ...tagsList.map((item) => item.toLowerCase() + "_product_tags"),
+  ...brandNames.map((item) => item.toLowerCase() + '_brand'),
+  ...productList.map((item) => item.toLowerCase() + '_product_type'),
+  ...tagsList.map((item) => item.toLowerCase() + '_product_tags'),
 ];

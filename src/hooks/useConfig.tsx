@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
-import { fetchCards } from "../api";
-import { getRandomBrand } from "../utils";
+import { useEffect, useMemo, useState } from 'react';
+import { fetchCards } from '../api';
+import { getRandomBrand } from '../utils';
 
 export interface ProductColor {
   hex_value: string;
@@ -26,9 +26,9 @@ interface FilterType {
 }
 
 export enum SearchType {
-  Product = "product",
-  Brand = "brand",
-  Tag = "tag",
+  Product = 'product',
+  Brand = 'brand',
+  Tag = 'tag',
 }
 
 export enum SearchStatusType {
@@ -44,17 +44,17 @@ export const emptyFilters: FiltersType = {
   brand: [],
   tag: [],
 };
-const LS_KEY: string = "makeup_kit";
+const LS_KEY: string = 'makeup_kit';
 
 const useConfig = () => {
-  const [searchedValue, setSearchedValue] = useState("");
+  const [searchedValue, setSearchedValue] = useState('');
   const [searchedItemType, setSearchedItemType] = useState<SearchType>(
-    SearchType.Brand
+    SearchType.Brand,
   );
   const [likedCards, setLikedCards] = useState<Card[]>([]);
   const [cards, setCards] = useState<Card[]>([]);
   const [searchStatus, setSearchStatus] = useState<SearchStatusType>(
-    SearchStatusType.Loading
+    SearchStatusType.Loading,
   );
   const [activeCard, setActiveCard] = useState<Card | null>(null);
   const [availableFilterOptions, setAvailableFilterOptions] =
@@ -83,7 +83,7 @@ const useConfig = () => {
   function isLiked(card: Card) {
     const isLiked = [];
     likedCards.map(
-      (likedCard) => likedCard.id === card.id && isLiked.push(card)
+      (likedCard) => likedCard.id === card.id && isLiked.push(card),
     );
     return isLiked.length > 0;
   }
@@ -99,7 +99,7 @@ const useConfig = () => {
 
   const updateAvailableFilterOptions = (
     cards: Card[],
-    searchedItemType: SearchType
+    searchedItemType: SearchType,
   ) => {
     let availableBrands: FilterType[] = [];
     let availableProducts: FilterType[] = [];
@@ -156,7 +156,7 @@ const useConfig = () => {
       setSearchedValue(brand);
       setSearchedItemType(SearchType.Brand);
 
-      const res = await fetchCards("?brand=" + brand);
+      const res = await fetchCards('?brand=' + brand);
       if (res) {
         const fetchedCards: Card[] = res.data.map((card: Card) => {
           return {
@@ -194,7 +194,7 @@ const useConfig = () => {
   async function getCards(
     query: string | undefined,
     searchValue: string,
-    searchTypeValue: SearchType
+    searchTypeValue: SearchType,
   ) {
     try {
       setSearchedValue(searchValue);
@@ -237,17 +237,17 @@ const useConfig = () => {
     let filteredCards: Card[] = cards;
     if (filters.brand.length > 0) {
       filteredCards = filteredCards.filter((card) =>
-        filters.brand.includes(card.brand)
+        filters.brand.includes(card.brand),
       );
     }
     if (filters.product.length > 0) {
       filteredCards = filteredCards.filter((card) =>
-        filters.product.includes(card.product_type)
+        filters.product.includes(card.product_type),
       );
     }
     if (filters.tag.length > 0) {
       filteredCards = filteredCards.filter((card) =>
-        filters.tag.some((tag) => card.tag_list.includes(tag))
+        filters.tag.some((tag) => card.tag_list.includes(tag)),
       );
     }
     setFilteredCards(filteredCards);

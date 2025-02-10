@@ -1,7 +1,7 @@
-import { useMediaQuery } from "../hooks/useMediaQuery";
-import MakeupKitBadge from "./MakeupKitBadge";
-import SearchField from "./SearchField";
-import SearchIcon from "../images/search.png";
+import { useMediaQuery } from '../hooks/useMediaQuery';
+import MakeupKitBadge from './MakeupKitBadge';
+import SearchField from './SearchField';
+import SearchIcon from '../images/search.png';
 
 const Header = ({
   setSuggestions,
@@ -22,17 +22,17 @@ const Header = ({
   setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
   suggestions: string[];
 }) => {
-  const isMobile = useMediaQuery("(max-width: 640px)");
+  const isMobile = useMediaQuery('(max-width: 640px)');
   function handleOverlayOpen() {
     setIsOverlayVisible(true);
   }
   return (
-    <div className="flex justify-center items-center p-3 gap-5 max-sm:mt-6">
-      <h1 className="uppercase text-xl font-medium font-mono max-sm:hidden">
+    <div className="flex items-center justify-center gap-5 p-3 max-sm:mt-6">
+      <h1 className="font-mono text-xl font-medium uppercase max-sm:hidden">
         Demo
       </h1>
-      <div className="grow bg-black rounded-3xl p-2 max-sm:p-4">
-        <h1 className="text-white text-base font-semibold uppercase text-center max-sm:text-xl">
+      <div className="grow rounded-3xl bg-black p-2 max-sm:p-4">
+        <h1 className="text-center text-base font-semibold uppercase text-white max-sm:text-xl">
           Create your makeup kit!
         </h1>
       </div>

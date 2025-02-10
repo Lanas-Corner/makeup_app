@@ -1,9 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
-import SearchIcon from "../images/search.png";
-import { AppContext } from "../context/AppContext";
-import { parameters } from "../const/parameters";
-import { checkType, normalizeSuggestion, parseQuery } from "../utils";
-import { useMediaQuery } from "../hooks/useMediaQuery";
+import React, { useState, useContext, useEffect } from 'react';
+import SearchIcon from '../images/search.png';
+import { AppContext } from '../context/AppContext';
+import { parameters } from '../const/parameters';
+import { checkType, normalizeSuggestion, parseQuery } from '../utils';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 const SearchField = ({
   setIsOverlayVisible,
@@ -22,12 +22,12 @@ const SearchField = ({
   setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
   suggestions: string[];
 }) => {
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<string>('');
   const { cards, getCards } = useContext(AppContext);
 
   function findSuggestions(value: string): string[] {
     const options: string[] = parameters.filter((param) =>
-      param.startsWith(value)
+      param.startsWith(value),
     );
     return options;
   }
@@ -63,17 +63,17 @@ const SearchField = ({
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     switch (e.key) {
-      case "ArrowDown": {
+      case 'ArrowDown': {
         setActiveIndex((i) => (i + 1) % suggestions.length);
         e.preventDefault();
         break;
       }
-      case "ArrowUp": {
+      case 'ArrowUp': {
         setActiveIndex((i) => (i < 0 ? suggestions.length - 1 : i - 1));
         e.preventDefault();
         break;
       }
-      case "Enter": {
+      case 'Enter': {
         if (activeIndex > -1 && activeIndex < suggestions.length) {
           setValue(normalizeSuggestion(suggestions[activeIndex]));
           handleOverlaySelect(suggestions[activeIndex]);
@@ -84,7 +84,7 @@ const SearchField = ({
         }
       }
 
-      case "Escape": {
+      case 'Escape': {
         handleOverlayClose();
         break;
       }
@@ -94,7 +94,7 @@ const SearchField = ({
   };
 
   useEffect(() => {
-    setValue("");
+    setValue('');
   }, [cards.length]);
 
   // return isMobile ? (
@@ -105,7 +105,7 @@ const SearchField = ({
   // (
   return (
     <div
-      className="flex relative bg-gray-200 p-2 gap-1 rounded-3xl focus-within:outline"
+      className="relative flex gap-1 rounded-3xl bg-gray-200 p-2 focus-within:outline"
       onKeyDown={handleKeyDown}
     >
       <img src={SearchIcon} width={22} height={20} alt="search" />

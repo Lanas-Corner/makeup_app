@@ -1,10 +1,10 @@
-import { useContext, useState, useRef, useEffect } from "react";
-import { Card } from "../hooks/useConfig";
-import Rating from "./Rating";
-import TagList from "./TagList";
-import ColorList from "./ColorList";
-import Image from "./Image";
-import { AppContext } from "../context/AppContext";
+import { useContext, useState, useRef, useEffect } from 'react';
+import { Card } from '../hooks/useConfig';
+import Rating from './Rating';
+import TagList from './TagList';
+import ColorList from './ColorList';
+import Image from './Image';
+import { AppContext } from '../context/AppContext';
 
 const CardView = ({
   card,
@@ -33,19 +33,19 @@ const CardView = ({
   }, []);
 
   return (
-    <div className="flex flex-col items-start p-6 px-14 py-12 rounded-2xl">
+    <div className="flex flex-col items-start rounded-2xl p-6 px-14 py-12">
       <button
         onClick={() => setActiveCard(null)}
-        className="p-4 mb-8 font-medium text-xl"
+        className="mb-8 p-4 text-xl font-medium"
       >
         Back
       </button>
-      <div className="flex gap-14 justify-center items-start">
-        <div className="flex flex-col gap-2 items-center bg-white py-8 px-12 rounded-3xl shrink-0 h-auto">
+      <div className="flex items-start justify-center gap-14">
+        <div className="flex h-auto shrink-0 flex-col items-center gap-2 rounded-3xl bg-white px-12 py-8">
           <Image imageSrc={card.image_link} width={300} height={350} />
           <ColorList colorList={card.product_colors} />
         </div>
-        <div className="flex flex-col p-4 gap-5 w-1/2">
+        <div className="flex w-1/2 flex-col gap-5 p-4">
           {card.rating && (
             <div className="mt-5">
               <Rating rating={card.rating} />
@@ -54,22 +54,22 @@ const CardView = ({
           <p className="text-3xl font-medium">{card.name}</p>
           <p className="uppercase">
             {card.brand && <span>{card.brand}</span>}
-            {card.brand && card.product_type && ", "}
+            {card.brand && card.product_type && ', '}
             {card.product_type && <span>{card.product_type}</span>}
           </p>
           <TagList tagList={card.tag_list} />
           <button
-            className="ml-auto mt-4 px-12 py-3 bg-black rounded-2xl text-white text-semibold w-1/3"
+            className="text-semibold ml-auto mt-4 w-1/3 rounded-2xl bg-black px-12 py-3 text-white"
             onClick={handleAdd}
           >
             {likedCards.some((likedCard) => likedCard.id === card.id)
-              ? "Added"
-              : "Add"}
+              ? 'Added'
+              : 'Add'}
           </button>
           <div
             className={
-              "border-gray-300 border-t-[1px] pt-4 " +
-              (!showDescription && "line-clamp-6")
+              'border-t-[1px] border-gray-300 pt-4 ' +
+              (!showDescription && 'line-clamp-6')
             }
             ref={descriptionRef}
           >
@@ -77,10 +77,10 @@ const CardView = ({
           </div>
           {isDescriptionOverflowing && (
             <button
-              className="font-medium ml-auto"
+              className="ml-auto font-medium"
               onClick={() => setShowDescription(!showDescription)}
             >
-              {showDescription ? "show less" : "show more"}
+              {showDescription ? 'show less' : 'show more'}
             </button>
           )}
         </div>

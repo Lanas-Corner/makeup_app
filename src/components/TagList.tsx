@@ -1,9 +1,9 @@
 const TagList = ({ tagList }: { tagList: string[] }) => {
   return (
-    <div className="flex flex-wrap gap-2 justify-end ml-auto mb-auto">
+    <div className="mb-auto ml-auto flex flex-wrap justify-end gap-2">
       {tagList.length > 0 &&
         tagList.map((tag, i) => (
-          <div key={i} className="px-2 py-1 bg-slate-200 rounded-2xl">
+          <div key={i} className="rounded-2xl bg-slate-200 px-2 py-1">
             <p>{tag}</p>
           </div>
         ))}

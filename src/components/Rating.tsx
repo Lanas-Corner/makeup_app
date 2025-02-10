@@ -1,5 +1,5 @@
-import starFilled from "../images/starRateFilled.svg";
-import starEmpty from "../images/starRateNotFilled.svg";
+import starFilled from '../images/starRateFilled.svg';
+import starEmpty from '../images/starRateNotFilled.svg';
 
 const Rating = ({ rating }: { rating: number }) => {
   const stars = [1, 2, 3, 4, 5];
@@ -11,7 +11,7 @@ const Rating = ({ rating }: { rating: number }) => {
           <img src={starFilled} key={i} alt="filled" width={20} />
         ) : (
           <img src={starEmpty} key={i} alt="empty" width={20} />
-        )
+        ),
       )}
     </div>
   );

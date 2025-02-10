@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-const baseURL = "https://makeup-api.herokuapp.com/api/v1/products.json";
+const baseURL = 'https://makeup-api.herokuapp.com/api/v1/products.json';
 
 export async function fetchCards(query?: string) {
   let URL = baseURL;

@@ -1,11 +1,11 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode } from 'react';
 import useConfig, {
   SearchStatusType,
   SearchType,
   FiltersType,
   emptyFilters,
-} from "../hooks/useConfig";
-import { Card } from "../hooks/useConfig";
+} from '../hooks/useConfig';
+import { Card } from '../hooks/useConfig';
 
 export type AppContextType = {
   searchedValue: string;
@@ -16,7 +16,7 @@ export type AppContextType = {
   getCards: (
     query: string | undefined,
     searchValue: string,
-    searchTypeValue: SearchType
+    searchTypeValue: SearchType,
   ) => void;
   addCard: (card: Card) => void;
   removeLikedCard: (card: Card) => void;
@@ -30,7 +30,7 @@ export type AppContextType = {
   removeFilter: (name: string, filterType: SearchType) => void;
 };
 export const AppContext = React.createContext<AppContextType>({
-  searchedValue: "",
+  searchedValue: '',
   searchedItemType: SearchType.Brand,
   fetchRandomBrandCards: () => {},
   cards: [],

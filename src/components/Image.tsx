@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import Placeholder from "../images/placeholder.jpg";
-import Sceleton from "./Sceleton";
+import React, { useState } from 'react';
+import Placeholder from '../images/placeholder.jpg';
+import Sceleton from './Sceleton';
 
 enum Status {
   Loading,

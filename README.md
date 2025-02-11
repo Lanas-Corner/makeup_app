@@ -1,11 +1,23 @@
-**CREATE YOUR MAKEUP KIT** is a demo app for searching makeup products by brand name and product type. 
+# CREATE YOUR MAKEUP KIT
 
-Users can pick their favourite makeup products and add them to the makeup kit. 
+CREATE YOUR MAKEUP KIT is a demo application providing information about makeup products. It allows users to search for makeup products by brand name, product type and tags; sort them; select their favorites; and add them to a makeup kit.
 
+This is a demo application created for demonstration purposes only. The information provided, including product data, is fetched from a public API and may be outdated or inaccurate.
 
-The client fetches data from the public API - https://makeup-api.herokuapp.com/.
+## Tech Stack
 
-Frontend - TypeScript, React, MobX, Ant Design.
+### Frontend:
 
+TypeScript
+React
+Tailwind
 
-Deployed in GitHub Pages - https://apsu96.github.io/makeup_app/.
+### API:
+
+Data is fetched from the public makeup API:
+https://makeup-api.herokuapp.com/
+
+## Demo
+
+Check out the live demo on GitHub Pages:
+https://lanas-corner.github.io/makeup_app/
